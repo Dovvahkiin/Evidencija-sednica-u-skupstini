@@ -1,0 +1,9 @@
+ui:
+
+- kreiranje sednice
+- dodavanje dnevnog reda
+- na zatvaranju sednice dodavanje zapisnika
+
+- profil
+
+- 
