@@ -3,19 +3,37 @@ import React from 'react'
 function TabelaPregled() {
   return (
     <>
-
-
-    <div className="okvirSajta">t
-    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo tenetur reprehenderit neque facilis iste velit obcaecati delectus. Ad at dolor voluptates nobis repellat, magnam ut numquam eaque id quas fugiat.</h1>
+         <h1>PREGLED SEDNICA SKUPŠTINE</h1>
+          <article className="tabelaPocetna">
    
        <table>
         <th>Test naslov</th>
         <th>Test naslov</th>
         <th>Test naslov</th>
         <th>Test naslov</th>
+        <th>Test naslov</th>
+
+        <tr>
+          <td>test 1</td>
+          <td>test 1</td>
+          <td>test 1</td>
+          <td>test 1</td>
+          <td>test 1</td>
+        </tr>        <tr>
+          <td>test 1</td>
+          <td>test 1</td>
+          <td>test 1</td>
+          <td>test 1</td>
+          <td>test 1</td>
+        </tr>        <tr>
+          <td>test 1</td>
+          <td>test 1</td>
+          <td>test 1</td>
+          <td>test 1</td>
+          <td>test 1</td>
+        </tr>
     </table>
-   
-    </div>
+          </article>
     </>
   )
 }
