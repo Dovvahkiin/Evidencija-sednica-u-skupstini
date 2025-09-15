@@ -39,7 +39,7 @@ if ograniciStatus > 2
 
 end if;
 
-	if oraniciStatus = 1 
+	if ograniciStatus = 1 
 	then
 	if DatumSedniceParametar < danasnjiDatum 
 		then 
