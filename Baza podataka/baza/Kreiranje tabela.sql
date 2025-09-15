@@ -21,7 +21,6 @@ foreign key (StatusSedniceID) references evidencijasednica.status_sednice(IDStat
 
 create table if not exists evidencijasednica.dnevni_red(
 IDDnevniRed int auto_increment primary key,
-RedniBrojTacke int not null,
 TekstTacke text not null,
 SednicaID int not null,
 foreign key (sednicaID) references evidencijasednica.sednica(IDSednice) on delete cascade
