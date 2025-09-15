@@ -39,13 +39,14 @@ if ograniciStatus > 2
 
 end if;
 
-	
-if DatumSedniceParametar < danasnjiDatum 
-then 
-rollback;
-select concat ('Sednica ne moze biti zakazana za datum koji je vec prosao.') as greska;
-leave izadji;
-
+	if oraniciStatus = 1 
+	then
+	if DatumSedniceParametar < danasnjiDatum 
+		then 
+		rollback;
+		select concat ('Sednica ne moze biti zakazana za datum koji je vec prosao.') as greska;
+		leave izadji;
+	end if;
 end if;
 
 	insert into evidencijasednica.sednica (NazivSednice, DatumSednice, BrojPrisutnih, StatusSedniceID, ZapisnikSednice)
