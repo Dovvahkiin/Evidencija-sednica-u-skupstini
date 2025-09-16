@@ -6,6 +6,7 @@ izadji:
 
 begin
 	declare proveraSednice int;
+	declare proveraStatusaSednice int;
 
 -- promenljive za unos
 
@@ -14,7 +15,12 @@ begin
 start transaction;
 
 	set proveraSednice = (
-	select ZapisnikSednice from evidencijasednica.sednica s
+	select IDSednice from evidencijasednica.sednica s
+	where s.IDSednice = IDSedniceParametar
+	);
+	
+	set proveraStatusaSednice = (
+	select StatusSedniceID from evidencijasednica.sednica s
 	where s.IDSednice = IDSedniceParametar
 	);
 	
@@ -22,6 +28,13 @@ start transaction;
 	then
 	rollback;
 	select concat ('Sednica ne postoji. Transakcija nije uspesna') as greska;
+	leave izadji;
+	end if;
+	
+	if proveraStatusaSednice = 1
+	then
+	rollback;
+	select concat ('Sednica nije zavrsena ili ne postoji. Transakcija nije uspesna.') as greska;
 	leave izadji;
 	end if;
 	
