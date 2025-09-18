@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "server.js",
+    "kontroleri",
+    "rute",
+    "poslovnaPravila/ukupnoClanova.json"
+  ],
+  "ext": "js,json",
+  "ignore": ["poslovnaPravila/kvorum.json"]
+}
