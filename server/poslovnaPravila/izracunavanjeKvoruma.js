@@ -8,7 +8,7 @@ const jsonFajlCitanje = fs.readFileSync(poslovnoPraviloUlaz, "utf8");
 const jsonPodaci = JSON.parse(jsonFajlCitanje);
 
 const kvorum = {
-  kvorum: (jsonPodaci.ukupanBrojClanova * 50) / 100 + 1,
+  kvorum: Math.floor((jsonPodaci.ukupanBrojClanova * 50) / 100 + 1),
 };
 
 const kvorumOsvezi = () => {

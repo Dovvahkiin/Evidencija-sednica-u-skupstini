@@ -8,7 +8,7 @@ const kvorumOsvezi = require("./poslovnaPravila/izracunavanjeKvoruma.js");
 
 const app = express();
 
-kvorumOsvezi();
+kvorumOsvezi(); // osvezavanje kvoruma na osnovu unetog ukupnog broja clanova u json
 
 /* testing 
 
