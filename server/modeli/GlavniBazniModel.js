@@ -5,17 +5,10 @@ class BazniModel {
     this.imeTabele = imeTabele;
   }
 
-  izvrsiUpit = (upit, parametri) => {
-    return new Promise((uspeh, neuspeh) => {
-      podaciBaze.query(upit, parametri, (greska, rezultat) => {
-        if (greska) {
-          neuspeh(greska);
-        } else {
-          uspeh(rezultat);
-        }
-      });
-    });
-  };
+  async izvrsiUpit(upit, parametri = []) {
+    const [redovi] = await podaciBaze.query(upit, parametri);
+    return redovi;
+  }
 
   async vratiSve() {
     const upit = `select * from ${this.imeTabele}`;
@@ -24,4 +17,4 @@ class BazniModel {
   }
 }
 
-module.exports = { BazniModel };
+module.exports = BazniModel;

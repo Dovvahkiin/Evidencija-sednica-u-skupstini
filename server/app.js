@@ -1,20 +1,21 @@
 const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const serverKonfiguracija = require("./konfiguracije/serverKonfiguracija");
+const app = express();
 const chalk = require("chalk");
 const cookieParser = require("cookie-parser");
+
+const serverKonfiguracija = require("./konfiguracije/serverKonfiguracija");
 const kvorumOsvezi = require("./poslovnaPravila/izracunavanjeKvoruma.js");
 
-const app = express();
+app.use(express.json());
+const sednicaRuter = require("./rute/SednicaRute.js");
 
-kvorumOsvezi(); // osvezavanje kvoruma na osnovu unetog ukupnog broja clanova u json
+//app.use(cors(serverKonfiguracija.corsOptions));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+//kvorumOsvezi(); // osvezavanje kvoruma na osnovu unetog ukupnog broja clanova u json
 
-/* testing 
-
-app.get("/", (req,res)=>
-{
-    res.send(kvorum);
-}) */
+app.use("/", sednicaRuter);
 
 module.exports = app;
