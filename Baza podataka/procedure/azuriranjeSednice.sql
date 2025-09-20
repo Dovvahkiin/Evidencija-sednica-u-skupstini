@@ -41,10 +41,10 @@ start transaction;
 	leave izadji;
 	end if;
 	
-	if ogranicenjeStatusa > 2 or ogranicenjeStatusa < 0 
+	if ogranicenjeStatusa > 4 or ogranicenjeStatusa < 0 
 	then
 	rollback;
-	select concat ('Status ne moze biti veci od 2 ili manji od 0. Transakcije nije uspesna.') as greska;
+	select concat ('Status ne moze biti veci od 4 ili manji od 0. Transakcije nije uspesna.') as greska;
 	leave izadji;
 	end if;
 	
@@ -64,7 +64,7 @@ start transaction;
 	set ZapisnikSedniceFinalno = ZapisnikSedniceParametar;
 	set StatusSedniceIDFinalno = StatusSedniceIDParametar;
 	
-	if trenutniStatusSednice = 2 and StatusSedniceIDFinalno = 1
+	if trenutniStatusSednice = 2 or trenutniStatusSednice = 3  and StatusSedniceIDFinalno = 1 or StatusSedniceIDFinalno = 4
 	then set ZapisnikSedniceFinalno = null;
 	end if;
 	

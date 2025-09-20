@@ -1,7 +1,7 @@
 const express = require("express");
 const ruter = express.Router();
 
-const SednicaKontroler = require("../kontroleri/sednicaKontroler.js");
+const { SednicaKontroler } = require("../kontroleri/sednicaKontroler.js");
 
 const instancaKontrolera = new SednicaKontroler();
 

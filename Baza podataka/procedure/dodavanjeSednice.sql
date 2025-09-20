@@ -9,6 +9,7 @@ begin
 	declare sednicaPostoji int;
 	declare ograniciStatus int;
 	declare danasnjiDatum date;
+	declare ZapisnikFinalno text;
 	
 	start transaction;
 	
@@ -22,6 +23,8 @@ begin
 	where status_sednice.IDStatusaSednice = StatusSedniceParametar
 	limit 1;
 	
+	set ZapisnikFinalno = ZapisnikSedniceParametar;
+	
 	
 if sednicaPostoji is not null
 	then
@@ -31,10 +34,10 @@ if sednicaPostoji is not null
 
 end if;
 
-if ograniciStatus > 2
+if ograniciStatus > 4
 	then
 	rollback;
-	select concat ('Status ne moze biti veci od 2') as greska;
+	select concat ('Status ne moze biti veci od 4') as greska;
 	leave izadji;
 
 end if;
@@ -49,8 +52,13 @@ end if;
 	end if;
 end if;
 
+	if ograniciStatus = 1 or ograniciStatus = 4
+	then
+	set ZapisnikFinalno = "";
+	end if;
+
 	insert into evidencijasednica.sednica (NazivSednice, DatumSednice, BrojPrisutnih, StatusSedniceID, ZapisnikSednice)
-	values (NazivSedniceParametar, DatumSedniceParametar, BrojPrisutnihParametar, StatusSedniceParametar, ZapisnikSedniceParametar);
+	values (NazivSedniceParametar, DatumSedniceParametar, BrojPrisutnihParametar, StatusSedniceParametar, ZapisnikFinalno);
 	commit;
 	
 	select concat ('Uspesno dodata sednica! Transakcija uspesna.') as uspesno;

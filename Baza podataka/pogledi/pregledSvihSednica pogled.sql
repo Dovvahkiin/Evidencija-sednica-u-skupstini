@@ -3,6 +3,8 @@ select
 	sed.IDSednice as ID,
 	sed.NazivSednice as NazivSednice,
 	DATE_FORMAT(sed.DatumSednice, '%d.%m.%Y') as Datum,
+	sed.BrojPrisutnih as BrojPrisutnih,
+	sed.ZapisnikSednice as Zapisnik,
 	statsed.NazivStatusaSednice as StatusSednice
 from
 	sednica sed

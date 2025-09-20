@@ -3,10 +3,10 @@ const {
 } = require("../poslovnaPravila/izracunavanjeKvoruma.js");
 
 const clanovi = ucitajUkupnoClanova();
-const ukupanBrojClanova = clanovi.ukupanBrojClanova;
 
 class ValidacijaSednice {
   async ValidirajPodatkeUnosa(unos = {}) {
+    const ukupanBrojClanova = clanovi.ukupanBrojClanova;
     const { NazivSednice, DatumSednice, BrojPrisutnih, StatusSedniceID } = unos;
 
     const greske = [];
@@ -38,7 +38,7 @@ class ValidacijaSednice {
 
 class PoziviValidacija extends ValidacijaSednice {
   async ValidacijaUnosa(podaci) {
-    const greske = this.ValidirajPodatkeUnosa(podaci);
+    const greske = await this.ValidirajPodatkeUnosa(podaci);
     if (greske.length > 0) {
       console.error("Greske pri validaciji:\n" + greske);
       return { validacija: true, greske };

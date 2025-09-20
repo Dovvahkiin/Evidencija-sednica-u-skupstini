@@ -41,7 +41,7 @@ class SednicaKontroler {
       return res.status(500).json({ Akcija: false, greska });
     }
   }
-  async KreirajSednicu(req, res, next) {
+  async KreirajSednicu(req, res) {
     const podaciKreiranja = req.body;
     const rezultatValidacije = await instancaValidacijaSednice.ValidacijaUnosa(
       podaciKreiranja
@@ -51,7 +51,6 @@ class SednicaKontroler {
         .status(400)
         .json({ GreskaValidacije: true, greske: rezultatValidacije.greske });
     }
-    next();
 
     try {
       const {
@@ -79,4 +78,4 @@ class SednicaKontroler {
   }
 }
 
-module.exports = SednicaKontroler;
+module.exports = { SednicaKontroler };

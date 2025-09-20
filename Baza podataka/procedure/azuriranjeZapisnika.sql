@@ -31,10 +31,10 @@ start transaction;
 	leave izadji;
 	end if;
 	
-	if proveraStatusaSednice = 1
+	if proveraStatusaSednice = 1 or proveraStatusaSednice = 4
 	then
 	rollback;
-	select concat ('Sednica nije zavrsena ili ne postoji. Transakcija nije uspesna.') as greska;
+	select concat ('Sednica je zakazana, otkazana ili ne postoji. Transakcija nije uspesna.') as greska;
 	leave izadji;
 	end if;
 	
