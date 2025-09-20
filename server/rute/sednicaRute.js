@@ -10,6 +10,9 @@ ruter
   .post(instancaKontrolera.KreirajSednicu)
   .get(instancaKontrolera.PregledSvihSednica);
 
-ruter.get("/sednica/:id", instancaKontrolera.PregledOdredjeneSednice);
+ruter
+  .route("/sednica/:id")
+  .get(instancaKontrolera.PregledOdredjeneSednice)
+  .delete(instancaKontrolera.BrisanjeSednice);
 
 module.exports = ruter;

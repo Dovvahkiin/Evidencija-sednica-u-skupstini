@@ -28,14 +28,15 @@ class SednicaAkcijaModel extends BazniModel {
     }
   }
 
-  async ObrisiSednicu(IDSednice) {
+  async ObrisiSednicu(id) {
     try {
       const upit = "CALL obrisiSednicu (?)";
-      const [rezultat] = await this.izvrsiUpit(upit, [IDSednice]);
-      return rezultat;
+      const rezultat = await this.izvrsiUpit(upit, [id]);
+      const daLiJeObrisano = rezultat[0]?.[0]?.obrisanRed || 0;
+      return daLiJeObrisano;
     } catch (greska) {
       console.error(greska);
-      throw greska;
+      return greska;
     }
   }
 
@@ -60,7 +61,7 @@ class SednicaAkcijaModel extends BazniModel {
       return rezultat;
     } catch (greska) {
       console.error(greska);
-      throw greska;
+      return greska;
     }
   }
 }

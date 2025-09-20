@@ -6,8 +6,13 @@ class BazniModel {
   }
 
   async izvrsiUpit(upit, parametri = []) {
-    const [redovi] = await podaciBaze.query(upit, parametri);
-    return redovi;
+    const [rezultat] = await podaciBaze.query(upit, parametri);
+    return rezultat;
+  }
+
+  async izvrsiExecuteUpit(upit, parametri = []) {
+    const [rezultat] = await podaciBaze.execute(upit, parametri);
+    return rezultat;
   }
 
   async vratiSve() {

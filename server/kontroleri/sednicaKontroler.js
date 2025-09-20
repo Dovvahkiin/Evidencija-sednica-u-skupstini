@@ -76,6 +76,28 @@ class SednicaKontroler {
       return res.status(500).json({ greska: "server error!", greska });
     }
   }
+
+  async BrisanjeSednice(req, res) {
+    try {
+      const IDSednice = parseInt(req.params.id, 10); // req.params.[element] - element u nasem slucaju id je ono sto stoji u ruti kao parametar
+      const rezultatBrisanja = await instancaAkcijeSednice.ObrisiSednicu(
+        IDSednice
+      );
+      console.log(rezultatBrisanja);
+      if (rezultatBrisanja > 0) {
+        return res.status(200).json({
+          Akcija: true,
+          Poruka: "Sednica sa ID " + IDSednice + " je obrisana!",
+        });
+      } else
+        return res
+          .status(404)
+          .json({ Akcija: false, Greska: "Sednica ne postoji." });
+    } catch (greska) {
+      console.error(greska);
+      return res.status(500).json({ Greska: greska });
+    }
+  }
 }
 
 module.exports = { SednicaKontroler };

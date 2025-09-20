@@ -13,7 +13,7 @@ start transaction;
 	where s.IDSednice = IDSedniceParametar
 	limit 1;
 	
-	if sednicaProvera is null or sednicaProvera = 0
+	if sednicaProvera is null
 	then
 	rollback;
 	select concat ('Sednica ne postoji. Transakcija nije uspela.') as greska;
@@ -21,6 +21,7 @@ start transaction;
 	end if;
 	
 	delete from evidencijasednica.sednica s where s.IDSednice = IDSedniceParametar;
+	select row_count() as obrisanRed;
 	commit;
 	select concat('Uspesno obrisana sednica. Transakcija uspesna.') as uspesno;
 	
