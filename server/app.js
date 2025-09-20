@@ -6,15 +6,15 @@ const chalk = require("chalk");
 const cookieParser = require("cookie-parser");
 
 const serverKonfiguracija = require("./konfiguracije/serverKonfiguracija");
-const kvorumOsvezi = require("./poslovnaPravila/izracunavanjeKvoruma.js");
+const { kvorumOsvezi } = require("./poslovnaPravila/izracunavanjeKvoruma.js");
 
 app.use(express.json());
 const sednicaRuter = require("./rute/SednicaRute.js");
 
-//app.use(cors(serverKonfiguracija.corsOptions));
+app.use(cors(serverKonfiguracija.corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-//kvorumOsvezi(); // osvezavanje kvoruma na osnovu unetog ukupnog broja clanova u json
+kvorumOsvezi(); // osvezavanje kvoruma na osnovu unetog ukupnog broja clanova u json
 
 app.use("/", sednicaRuter);
 

@@ -3,23 +3,56 @@ const {
   SednicaPregledModel,
 } = require("../modeli/SednicaModel.js");
 
+const { PoziviValidacija } = require("../validacije/validacijaSednice.js");
+
+const instancaValidacijaSednice = new PoziviValidacija();
 const instancaAkcijeSednice = new SednicaAkcijaModel();
 const instancaPregledaSednica = new SednicaPregledModel();
 
-class SednicaGetKontroler {
+class SednicaKontroler {
   async PregledSvihSednica(req, res) {
     const pregledajSveSednice = await instancaPregledaSednica.vratiSve();
     try {
-      return res.status(200).json({ Akcija: true, pregledajSveSednice });
+      if (pregledajSveSednice.length === 0) {
+        return res.status(404).json({
+          Akcija: false,
+          Poruka: "Ne postoji ni jedna zabelezena sednica!",
+        });
+      } else return res.status(200).json({ Akcija: true, pregledajSveSednice });
     } catch (greska) {
       console.error(greska);
       return res.status(404).json({ Akcija: false, greska });
     }
   }
-}
 
-class SednicaPostKontroler {
-  async KreirajSednicu(req, res) {
+  async PregledOdredjeneSednice(req, res) {
+    const ID = parseInt(req.params.id, 10);
+    try {
+      const pregledSednicePoIDu = await instancaPregledaSednica.vratiPoIDu(ID);
+      if (pregledSednicePoIDu.length === 0) {
+        return res
+          .status(404)
+          .json({ Akcija: false, Poruka: "Sednica ne postoji!" });
+      } else {
+        return res.status(200).json({ Akcija: true, pregledSednicePoIDu });
+      }
+    } catch (greska) {
+      console.error(greska);
+      return res.status(500).json({ Akcija: false, greska });
+    }
+  }
+  async KreirajSednicu(req, res, next) {
+    const podaciKreiranja = req.body;
+    const rezultatValidacije = await instancaValidacijaSednice.ValidacijaUnosa(
+      podaciKreiranja
+    );
+    if (!rezultatValidacije.validacija) {
+      return res
+        .status(400)
+        .json({ GreskaValidacije: true, greske: rezultatValidacije.greske });
+    }
+    next();
+
     try {
       const {
         NazivSednice,
@@ -27,7 +60,7 @@ class SednicaPostKontroler {
         BrojPrisutnih,
         StatusSedniceID,
         ZapisnikSednice,
-      } = req.body;
+      } = podaciKreiranja;
 
       const napraviNovuSednicu = await instancaAkcijeSednice.DodajNovuSednicu(
         NazivSednice,
@@ -41,9 +74,9 @@ class SednicaPostKontroler {
       return res.status(201).json({ Uspeh: true, napraviNovuSednicu });
     } catch (greska) {
       console.error(greska);
-      return res.status(500).json({ greska: "server error!" });
+      return res.status(500).json({ greska: "server error!", greska });
     }
   }
 }
 
-module.exports = { SednicaPostKontroler, SednicaGetKontroler };
+module.exports = SednicaKontroler;

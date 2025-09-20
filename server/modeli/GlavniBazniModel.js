@@ -11,15 +11,24 @@ class BazniModel {
   }
 
   async vratiSve() {
-    const upit = `select * from ${this.imeTabele}`;
-    const rezultat = await this.izvrsiUpit(upit);
-    return rezultat;
+    try {
+      const upit = `select * from ${this.imeTabele}`;
+      const rezultat = await this.izvrsiUpit(upit);
+      return rezultat;
+    } catch (greska) {
+      console.error(greska);
+    }
   }
 
   async vratiPoIDu(id) {
-    const upit = `select * from ${this.imeTabele} where ID = ${id}`;
-    const rezultat = await this.izvrsiUpit(upit);
-    return rezultat;
+    try {
+      const upit = `select * from ${this.imeTabele} where ID = ?`;
+      const rezultat = await this.izvrsiUpit(upit, [id]);
+      return rezultat;
+    } catch (greska) {
+      console.error(greska);
+      throw greska;
+    }
   }
 }
 
