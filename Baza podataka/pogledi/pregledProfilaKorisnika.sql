@@ -1,5 +1,7 @@
 create view pregledProfilaKorisnika as
-select korisnik.ImeKorisnika as ImeKorisnika,
+select 
+	   korisnik.IDKorisnika as ID,
+	   korisnik.ImeKorisnika as ImeKorisnika,
 	   korisnik.PrezimeKorisnika as PrezimeKorisnika,
 	   korisnik.EmailKorisnika as EmailKorisnika,
 	   status.NazivStatusa as StatusKorisnika

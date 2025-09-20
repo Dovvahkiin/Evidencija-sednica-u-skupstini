@@ -15,6 +15,12 @@ class BazniModel {
     const rezultat = await this.izvrsiUpit(upit);
     return rezultat;
   }
+
+  async vratiPoIDu(id) {
+    const upit = `select * from ${this.imeTabele} where ID = ${id}`;
+    const rezultat = await this.izvrsiUpit(upit);
+    return rezultat;
+  }
 }
 
 module.exports = BazniModel;

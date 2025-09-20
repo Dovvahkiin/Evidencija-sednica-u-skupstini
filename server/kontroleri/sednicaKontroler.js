@@ -1,6 +1,22 @@
-const SednicaModel = require("../modeli/SednicaModel.js");
+const {
+  SednicaAkcijaModel,
+  SednicaPregledModel,
+} = require("../modeli/SednicaModel.js");
 
-const instancaModelaSednice = new SednicaModel();
+const instancaAkcijeSednice = new SednicaAkcijaModel();
+const instancaPregledaSednica = new SednicaPregledModel();
+
+class SednicaGetKontroler {
+  async PregledSvihSednica(req, res) {
+    const pregledajSveSednice = await instancaPregledaSednica.vratiSve();
+    try {
+      return res.status(200).json({ Akcija: true, pregledajSveSednice });
+    } catch (greska) {
+      console.error(greska);
+      return res.status(404).json({ Akcija: false, greska });
+    }
+  }
+}
 
 class SednicaPostKontroler {
   async KreirajSednicu(req, res) {
@@ -13,7 +29,7 @@ class SednicaPostKontroler {
         ZapisnikSednice,
       } = req.body;
 
-      const napraviNovuSednicu = await instancaModelaSednice.DodajNovuSednicu(
+      const napraviNovuSednicu = await instancaAkcijeSednice.DodajNovuSednicu(
         NazivSednice,
         DatumSednice,
         BrojPrisutnih,
@@ -24,10 +40,10 @@ class SednicaPostKontroler {
       console.log("Uspesno kreiranje sednice.");
       return res.status(201).json({ Uspeh: true, napraviNovuSednicu });
     } catch (greska) {
-      console.log(greska);
+      console.error(greska);
       return res.status(500).json({ greska: "server error!" });
     }
   }
 }
 
-module.exports = SednicaPostKontroler;
+module.exports = { SednicaPostKontroler, SednicaGetKontroler };
