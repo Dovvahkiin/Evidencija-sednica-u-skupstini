@@ -37,7 +37,7 @@ class SednicaKontroler {
         return res.status(200).json({ Akcija: true, pregledSednicePoIDu });
       }
     } catch (greska) {
-      console.error(greska);
+      console.log(greska);
       return res.status(500).json({ Akcija: false, greska });
     }
   }

@@ -1,7 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-
-const poslovnoPraviloUlaz = path.join(__dirname, "ukupnoClanova.json");
 const poslovnoPraviloIzlaz = path.join(__dirname, "kvorum.json");
 
 const ucitajKvorum = () => {
@@ -9,6 +7,7 @@ const ucitajKvorum = () => {
   return jsonKvorumPodaci;
 };
 const ucitajUkupnoClanova = () => {
+  const poslovnoPraviloUlaz = path.join(__dirname, "ukupnoClanova.json");
   const jsonClanovi = fs.readFileSync(poslovnoPraviloUlaz, "utf8");
   const jsonPodaci = JSON.parse(jsonClanovi);
   return jsonPodaci;
