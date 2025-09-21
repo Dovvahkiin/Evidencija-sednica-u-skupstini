@@ -67,14 +67,12 @@ class SednicaKontroler {
       } = podaciKreiranja;
 
       let noviStatus = StatusSedniceID;
+
       const proveraPrisutnih = await instancaDetalja.DaLiImaDovoljnoPrisutnih(
         BrojPrisutnih
       );
-      console.log("Da li ima dovoljno clanova: ", proveraPrisutnih);
-
-      if (proveraPrisutnih === false) {
+      if (!proveraPrisutnih) {
         noviStatus = 3;
-        console.log("Novi status sednice: ", noviStatus);
       }
 
       const napraviNovuSednicu = await instancaAkcijeSednice.DodajNovuSednicu(
