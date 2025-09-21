@@ -1,5 +1,0 @@
-{
-  "watch": ["server.js", "rute", "kontroleri", "poslovnaPravila/kvorum.json"],
-  "ext": "js,json",
-  "ignore": ["poslovnaPravila/kvorum.json"]
-}
