@@ -34,11 +34,68 @@ class ValidacijaSednice {
 
     return greske;
   }
+
+  async ValidirajIzmenuPodataka(unos = {}) {
+    const ukupanBrojClanova = clanovi.ukupanBrojClanova;
+    const { NazivSednice, DatumSednice, BrojPrisutnih, StatusSedniceID } = unos;
+    const greske = [];
+
+    if (NazivSednice) {
+      if (NazivSednice.length < 1 || NazivSednice.trim() === "") {
+        greske.push(
+          "Naziv sednice mora imati barem jedan karakter.\nNaziv ne sme imati samo razmake bez karaktera.\n"
+        );
+      }
+    }
+
+    if (StatusSedniceID === 1) {
+      const danas = new Date();
+      if (DatumSednice < danas.getFullYear() || DatumSednice.trim() === "") {
+        greske.push(
+          "Datum ne moze biti manji od danasnjeg datuma ili samo razmaci.\n"
+        );
+      }
+    }
+    if (StatusSedniceID) {
+      if (
+        StatusSedniceID > 4 ||
+        StatusSedniceID < 1 ||
+        StatusSedniceID.trim() === ""
+      ) {
+        greske.push(
+          "Status ne moze biti veci od 4 ili manji od 1 ili prazan ili samo razmaci \n"
+        );
+      }
+    }
+    if (BrojPrisutnih) {
+      if (
+        BrojPrisutnih > ukupanBrojClanova ||
+        BrojPrisutnih < 0 ||
+        BrojPrisutnih.trim() === ""
+      ) {
+        greske.push(
+          "Broj prisutnih ne moze biti veci od: " +
+            ukupanBrojClanova +
+            " ili manji od 0 ili samo razmaci!"
+        );
+      }
+    }
+    return greske;
+  }
 }
 
 class PoziviValidacija extends ValidacijaSednice {
   async ValidacijaUnosa(podaci) {
     const greske = await this.ValidirajPodatkeUnosa(podaci);
+    if (greske.length > 0) {
+      console.log("\n\nGreske pri validaciji:\n\n" + greske.join("\n"));
+      return { validacija: false, greske };
+    }
+    return { validacija: true };
+  }
+
+  async ValidacijaIzmene(podaci) {
+    const greske = await this.ValidirajIzmenuPodataka(podaci);
     if (greske.length > 0) {
       console.log("\n\nGreske pri validaciji:\n\n" + greske.join("\n"));
       return { validacija: false, greske };

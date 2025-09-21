@@ -52,11 +52,11 @@ class SednicaAkcijaModel extends BazniModel {
       const upit = "CALL azurirajSednicu (?,?,?,?,?,?)";
       const [rezultat] = await this.izvrsiUpit(upit, [
         IDSednice,
-        NazivSednice,
-        DatumSednice,
-        BrojPrisutnih,
-        StatusSedniceID,
-        ZapisnikSednice,
+        NazivSednice || null,
+        DatumSednice || null,
+        BrojPrisutnih || null,
+        StatusSedniceID || null,
+        ZapisnikSednice || null,
       ]);
       return rezultat;
     } catch (greska) {

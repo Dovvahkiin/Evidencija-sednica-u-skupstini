@@ -13,6 +13,7 @@ ruter
 ruter
   .route("/sednica/:id")
   .get(instancaKontrolera.PregledOdredjeneSednice)
-  .delete(instancaKontrolera.BrisanjeSednice);
+  .delete(instancaKontrolera.BrisanjeSednice)
+  .put(instancaKontrolera.IzmenaSednice);
 
 module.exports = ruter;

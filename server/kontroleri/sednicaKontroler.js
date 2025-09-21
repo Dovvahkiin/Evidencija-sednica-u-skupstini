@@ -98,6 +98,43 @@ class SednicaKontroler {
       return res.status(500).json({ Greska: greska });
     }
   }
+
+  async IzmenaSednice(req, res) {
+    const podaciIzmene = req.body;
+    const rezultatValidacije = await instancaValidacijaSednice.ValidacijaIzmene(
+      podaciIzmene
+    );
+    if (!rezultatValidacije.validacija) {
+      return res
+        .status(400)
+        .json({ GreskaValidacije: true, greske: rezultatValidacije.greske });
+    }
+    try {
+      const {
+        NazivSednice,
+        DatumSednice,
+        BrojPrisutnih,
+        StatusSedniceID,
+        ZapisnikSednice,
+      } = podaciIzmene;
+
+      const ID = parseInt(req.params.id, 10);
+      const rezultatIzmene = await instancaAkcijeSednice.IzmeniSednicu(
+        ID,
+        NazivSednice,
+        DatumSednice,
+        BrojPrisutnih,
+        StatusSedniceID,
+        ZapisnikSednice
+      );
+
+      console.log("Uspesna izmena sednice.");
+      return res.status(202).json({ Uspeh: true, rezultatIzmene });
+    } catch (greska) {
+      console.error(greska);
+      res.status(500).json({ Greska: greska });
+    }
+  }
 }
 
 module.exports = { SednicaKontroler };
