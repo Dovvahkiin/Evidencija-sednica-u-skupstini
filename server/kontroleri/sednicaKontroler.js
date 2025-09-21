@@ -1,6 +1,7 @@
 const {
   SednicaAkcijaModel,
   SednicaPregledModel,
+  SednicaDetaljanPregledModel,
 } = require("../modeli/SednicaModel.js");
 
 const { PoziviValidacija } = require("../validacije/validacijaSednice.js");
@@ -8,6 +9,7 @@ const { PoziviValidacija } = require("../validacije/validacijaSednice.js");
 const instancaValidacijaSednice = new PoziviValidacija();
 const instancaAkcijeSednice = new SednicaAkcijaModel();
 const instancaPregledaSednica = new SednicaPregledModel();
+const instancaDetaljnogPregledaSednice = new SednicaDetaljanPregledModel();
 
 class SednicaKontroler {
   async PregledSvihSednica(req, res) {
@@ -28,7 +30,8 @@ class SednicaKontroler {
   async PregledOdredjeneSednice(req, res) {
     const ID = parseInt(req.params.id, 10);
     try {
-      const pregledSednicePoIDu = await instancaPregledaSednica.vratiPoIDu(ID);
+      const pregledSednicePoIDu =
+        await instancaDetaljnogPregledaSednice.vratiPoIDu(ID);
       if (pregledSednicePoIDu.length === 0) {
         return res
           .status(404)
@@ -68,6 +71,11 @@ class SednicaKontroler {
         StatusSedniceID,
         ZapisnikSednice
       );
+      if (napraviNovuSednicu[0]?.greska) {
+        return res
+          .status(400)
+          .json({ Uspeh: false, Greska: napraviNovuSednicu[0].greska });
+      } // proveravanje da li je baza izbacila gresku
 
       console.log("Uspesno kreiranje sednice.");
       return res.status(201).json({ Uspeh: true, napraviNovuSednicu });
@@ -83,7 +91,6 @@ class SednicaKontroler {
       const rezultatBrisanja = await instancaAkcijeSednice.ObrisiSednicu(
         IDSednice
       );
-      console.log(rezultatBrisanja);
       if (rezultatBrisanja > 0) {
         return res.status(200).json({
           Akcija: true,

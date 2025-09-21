@@ -36,7 +36,7 @@ class SednicaAkcijaModel extends BazniModel {
       return daLiJeObrisano;
     } catch (greska) {
       console.error(greska);
-      return greska;
+      throw greska;
     }
   }
 
@@ -61,7 +61,7 @@ class SednicaAkcijaModel extends BazniModel {
       return rezultat;
     } catch (greska) {
       console.error(greska);
-      return greska;
+      throw greska;
     }
   }
 }
@@ -72,4 +72,14 @@ class SednicaPregledModel extends BazniModel {
   }
 }
 
-module.exports = { SednicaAkcijaModel, SednicaPregledModel };
+class SednicaDetaljanPregledModel extends BazniModel {
+  constructor() {
+    super("detaljanpregledsednice");
+  }
+}
+
+module.exports = {
+  SednicaAkcijaModel,
+  SednicaPregledModel,
+  SednicaDetaljanPregledModel,
+};

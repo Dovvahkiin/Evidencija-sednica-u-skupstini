@@ -6,7 +6,7 @@ const { SednicaKontroler } = require("../kontroleri/sednicaKontroler.js");
 const instancaKontrolera = new SednicaKontroler();
 
 ruter
-  .route("/sednica")
+  .route("/sednice")
   .post(instancaKontrolera.KreirajSednicu)
   .get(instancaKontrolera.PregledSvihSednica);
 

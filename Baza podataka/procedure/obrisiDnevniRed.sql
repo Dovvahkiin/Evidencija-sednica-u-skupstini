@@ -1,6 +1,6 @@
 delimiter $$
 
-create procedure obrisiDnevniRed (in IDDnevnogRedaParametar int)
+create procedure obrisiDnevniRed (in IDSedniceParametar int)
 izadji:
 
 begin
@@ -10,19 +10,19 @@ start transaction;
 
 	select IDDnevniRed into dnevniRedProvera
 	from evidencijasednica.dnevni_red dred
-	where dred.IDDnevniRed = IDDnevnogRedaParametar
+	where dred.SednicaID = IDSedniceParametar
 	limit 1;
 	
 	if dnevniRedProvera is null or dnevniRedProvera = 0
 	then
 	rollback;
-	select concat ('Dnevni red ne postoji. Transakcija nije uspela.') as greska;
+	select 0 as obrisano,'Dnevni red ne postoji. Transakcija nije uspela.' as greska;
 	leave izadji;
 	end if;
 	
-	delete from evidencijasednica.dnevni_red dred where dred.IDDnevniRed = IDDnevnogRedaParametar;
+	delete from evidencijasednica.dnevni_red dred where dred.SednicaID = IDSedniceParametar;
 	commit;
-	select concat('Uspesno obrisan dnevni red. Transakcija uspesna.') as uspesno;
+	select 1 as obrisano,'Uspesno obrisan dnevni red. Transakcija uspesna.' as uspesno;
 	
 end $$
 delimiter ;
