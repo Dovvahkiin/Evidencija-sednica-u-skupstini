@@ -1,12 +1,14 @@
 const {
-  ucitajUkupnoClanova,
-} = require("../poslovnaPravila/izracunavanjeKvoruma.js");
+  DetaljiPodatakaClanova,
+  UcitavanjeClanova,
+} = require("../poslovnaPravila/kvorum.js");
 
-const clanovi = ucitajUkupnoClanova();
+const instancaDetalja = new DetaljiPodatakaClanova();
+const instancaClanova = new UcitavanjeClanova();
 
 class ValidacijaSednice {
   async ValidirajPodatkeUnosa(unos = {}) {
-    const ukupanBrojClanova = clanovi.ukupanBrojClanova;
+    const clanovi = await instancaClanova.UcitajUkupnoClanova();
     const { NazivSednice, DatumSednice, BrojPrisutnih, StatusSedniceID } = unos;
 
     const greske = [];
@@ -24,15 +26,16 @@ class ValidacijaSednice {
     if (
       !BrojPrisutnih ||
       BrojPrisutnih.trim() === "" ||
-      BrojPrisutnih > ukupanBrojClanova ||
+      BrojPrisutnih > clanovi ||
       BrojPrisutnih < 0
     ) {
       greske.push(
         "Broj prisutnih ne moze biti veci od: " +
-          ukupanBrojClanova +
+          clanovi +
           " ili manji od 0 ili prazan!"
       );
     }
+
     if (
       !StatusSedniceID ||
       StatusSedniceID > 4 ||
@@ -46,7 +49,7 @@ class ValidacijaSednice {
   }
 
   async ValidirajIzmenuPodataka(unos = {}) {
-    const ukupanBrojClanova = clanovi.ukupanBrojClanova;
+    const clanovi = await instancaClanova.UcitajUkupnoClanova();
     const { NazivSednice, DatumSednice, BrojPrisutnih, StatusSedniceID } = unos;
     const greske = [];
 
@@ -79,17 +82,18 @@ class ValidacijaSednice {
     }
     if (BrojPrisutnih) {
       if (
-        BrojPrisutnih > ukupanBrojClanova ||
+        BrojPrisutnih > clanovi ||
         BrojPrisutnih < 0 ||
         BrojPrisutnih.trim() === ""
       ) {
         greske.push(
           "Broj prisutnih ne moze biti veci od: " +
-            ukupanBrojClanova +
+            clanovi +
             " ili manji od 0 ili samo razmaci!"
         );
       }
     }
+
     return greske;
   }
 }

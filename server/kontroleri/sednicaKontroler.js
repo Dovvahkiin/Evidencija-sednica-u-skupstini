@@ -5,11 +5,13 @@ const {
 } = require("../modeli/SednicaModel.js");
 
 const { PoziviValidacija } = require("../validacije/validacijaSednice.js");
+const { DetaljiPodatakaClanova } = require("../poslovnaPravila/kvorum.js");
 
 const instancaValidacijaSednice = new PoziviValidacija();
 const instancaAkcijeSednice = new SednicaAkcijaModel();
 const instancaPregledaSednica = new SednicaPregledModel();
 const instancaDetaljnogPregledaSednice = new SednicaDetaljanPregledModel();
+const instancaDetalja = new DetaljiPodatakaClanova();
 
 class SednicaKontroler {
   async PregledSvihSednica(req, res) {
@@ -64,13 +66,25 @@ class SednicaKontroler {
         ZapisnikSednice,
       } = podaciKreiranja;
 
+      let noviStatus = StatusSedniceID;
+      const proveraPrisutnih = await instancaDetalja.DaLiImaDovoljnoPrisutnih(
+        BrojPrisutnih
+      );
+      console.log("Da li ima dovoljno clanova: ", proveraPrisutnih);
+
+      if (proveraPrisutnih === false) {
+        noviStatus = 3;
+        console.log("Novi status sednice: ", noviStatus);
+      }
+
       const napraviNovuSednicu = await instancaAkcijeSednice.DodajNovuSednicu(
         NazivSednice,
         DatumSednice,
         BrojPrisutnih,
-        StatusSedniceID,
+        noviStatus,
         ZapisnikSednice
       );
+
       if (napraviNovuSednicu[0]?.greska) {
         return res
           .status(400)
