@@ -8,5 +8,5 @@ select
 	status.NazivStatusaSednice as StatusSednice,
 	tacka.TekstTacke as DnevniRed
 from evidencijasednica.sednica sednica
-left join evidencijasednica.status_sednice status on status.IDStatusaSednice = sednica.IDSednice
+left join evidencijasednica.status_sednice status on status.IDStatusaSednice = sednica.StatusSedniceID
 left join evidencijasednica.dnevni_red tacka on tacka.SednicaID = sednica.IDSednice;

@@ -10,12 +10,16 @@ app.use(express.json());
 
 const sednicaRuter = require("./rute/SednicaRute.js");
 const dnevniRedRuter = require("./rute/dnevniRedRute.js");
+const korisnikRuter = require("./rute/korisnikRute.js");
+const autentikacijaRuter = require("./rute/autentikacioneRute.js");
 
 app.use(cors(serverKonfiguracija.corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/", sednicaRuter);
+app.use("/", korisnikRuter);
 app.use("/", dnevniRedRuter);
+app.use("/", autentikacijaRuter);
 
 module.exports = app;
