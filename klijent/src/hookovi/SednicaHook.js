@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import SedniceServis from "../servisi/SedniceServis";
 
@@ -51,6 +52,6 @@ export function VratiSednicuPoIDu(id) {
     };
     console.log(sednicaPoIDu);
     preuzmiSednicuPoIDu();
-  }, [sednicaPoIDu, id]);
+  }, [id]);
   return { sednicaPoIDu, ucitavanjePoIDu, greskaPoIDu };
 }
