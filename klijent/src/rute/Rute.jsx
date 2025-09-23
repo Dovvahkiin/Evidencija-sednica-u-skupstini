@@ -5,7 +5,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Pocetna from "../stranice/Pocetna";
 import Prijava from "../stranice/Prijava";
 import Profil from "../stranice/Profil";
-import Registracija from "../stranice/Registracija";
 import NijePronadjeno from "../stranice/NijePronadjeno";
 import Sednica from "../stranice/Sednica";
 //funkcija routera
@@ -23,10 +22,6 @@ const ruter = createBrowserRouter([
   {
     path: "/profil",
     element: <Profil />,
-  },
-  {
-    path: "/registracija",
-    element: <Registracija />,
   },
   {
     path: "/sednice/:id",

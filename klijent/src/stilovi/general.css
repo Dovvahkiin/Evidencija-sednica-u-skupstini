@@ -73,3 +73,12 @@ a {
 .okvirSajta > .zapisnikSednica {
   max-width: 700px;
 }
+
+/* Pretraga */
+
+.pretragaKontejner {
+  display: flex;
+  gap: 10px;
+  border: 1px solid green;
+  padding: 1.2rem;
+}
