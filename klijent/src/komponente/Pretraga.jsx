@@ -1,17 +1,28 @@
 import React, { useState } from "react";
 
-function Pretraga() {
-  const [pretrazi, koristiPretrazi] = useState("");
-
+function Pretraga({ elementPretrage }) {
+  const [pretraga, koristiPretragu] = useState("");
   const pretragaKucanje = (e) => {
-    koristiPretrazi(e.target.value);
+    koristiPretragu(e.target.value);
+  };
+
+  const PretragaKlik = (e) => {
+    e.preventDefault();
+    elementPretrage(pretraga);
   };
 
   return (
     <div className="pretragaKontejner">
-      <span>Pretraga po ID-u: </span>
-      <input type="text" value={pretrazi} onChange={pretragaKucanje} />
-      <button>Pretraži</button>
+      <form onSubmit={PretragaKlik}>
+        <span>Pretraga po ID-u: </span>
+        <input
+          type="text"
+          name="pretraga"
+          value={pretraga}
+          onChange={pretragaKucanje}
+        />
+        <button>Pretraži</button>
+      </form>
     </div>
   );
 }

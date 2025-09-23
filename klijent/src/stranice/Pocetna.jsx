@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import TabelaPregled from "../komponente/tabele/TabelaPregled";
 import Header from "../komponente/Header/Header";
 import Footer from "../komponente/Footer";
+import Pretraga from "../komponente/Pretraga";
 
 const PocetnaPrijavljen = () => {
+  const [pretragaID, postaviPretragaID] = useState("");
   return (
     <main>
       <Header />
       <section className="okvirSajta">
-        <TabelaPregled />
+        <Pretraga elementPretrage={postaviPretragaID} />
+        <TabelaPregled PretragaPoIDu={pretragaID} />
         <Footer />
       </section>
     </main>

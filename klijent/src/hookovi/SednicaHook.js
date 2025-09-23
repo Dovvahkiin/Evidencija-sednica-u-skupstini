@@ -24,3 +24,33 @@ export function VratiSednice() {
 
   return { sednice, ucitavanje, greska };
 }
+export function VratiSednicuPoIDu(id) {
+  const [sednicaPoIDu, PostaviSednice] = useState(null);
+  const [ucitavanjePoIDu, PostaviUcitavanje] = useState(false);
+  const [greskaPoIDu, PostaviGresku] = useState(null);
+
+  useEffect(() => {
+    if (!id) {
+      PostaviGresku(null);
+      PostaviUcitavanje(false);
+      PostaviSednice(null);
+      return;
+    }
+
+    const preuzmiSednicuPoIDu = async () => {
+      PostaviUcitavanje(true);
+      try {
+        const podaci = await instanceSednice.UcitajSednicuPoIDu(id);
+        const sednica = podaci.pregledSednicePoIDu?.[0];
+        PostaviSednice([sednica]);
+      } catch (greskica) {
+        PostaviGresku(greskica.message || "Greska pri ucitavanje sednica");
+      } finally {
+        PostaviUcitavanje(false);
+      }
+    };
+    console.log(sednicaPoIDu);
+    preuzmiSednicuPoIDu();
+  }, [id]);
+  return { sednicaPoIDu, ucitavanjePoIDu, greskaPoIDu };
+}

@@ -18,12 +18,16 @@ ruter
 
 ruter
   .route("/sednica/:id")
-  .all(
-    instanceAutentikacije.Autentikacija,
-    instanceAutentikacije.ProveraOvlascenja("admin")
-  )
   .get(instancaKontrolera.PregledOdredjeneSednice)
-  .delete(instancaKontrolera.BrisanjeSednice)
-  .put(instancaKontrolera.IzmenaSednice);
+  .delete(
+    instanceAutentikacije.Autentikacija,
+    instanceAutentikacije.ProveraOvlascenja("admin"),
+    instancaKontrolera.BrisanjeSednice
+  )
+  .put(
+    instanceAutentikacije.Autentikacija,
+    instanceAutentikacije.ProveraOvlascenja("admin"),
+    instancaKontrolera.IzmenaSednice
+  );
 
 module.exports = ruter;

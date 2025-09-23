@@ -1,17 +1,17 @@
 import React from "react";
-import Pretraga from "../Pretraga";
-import { VratiSednice } from "../../hookovi/SednicaHook";
+import { VratiSednice, VratiSednicuPoIDu } from "../../hookovi/SednicaHook";
 
-function TabelaPregled() {
+function TabelaPregled({ PretragaPoIDu }) {
   const { sednice, ucitavanje, greska } = VratiSednice();
+  const { sednicaPoIDu, ucitavanjePoIdu, greskaPoIdu } =
+    VratiSednicuPoIDu(PretragaPoIDu);
 
-  if (ucitavanje) return <p>Ucitavanje...</p>;
-  if (greska) return <p>Greska: {greska}</p>;
+  if (ucitavanje || ucitavanjePoIdu) return <p>Ucitavanje...</p>;
+  if (greska || greskaPoIdu) return <p>Greska: {greska || greskaPoIdu}</p>;
 
   return (
     <>
       <h1>PREGLED SEDNICA SKUPŠTINE</h1>
-      <Pretraga />
       <article className="tabelaPocetna">
         <table>
           <thead>
@@ -23,14 +23,31 @@ function TabelaPregled() {
             </tr>
           </thead>
           <tbody>
-            {sednice.map((sednica) => (
-              <tr key={sednica.ID}>
-                <td>{sednica.NazivSednice}</td>
-                <td>{sednica.Datum}</td>
-                <td>{sednica.BrojPrisutnih}</td>
-                <td>{sednica.StatusSednice}</td>
-              </tr>
-            ))}
+            {PretragaPoIDu ? (
+              sednicaPoIDu ? (
+                sednicaPoIDu.map((sednica, indeks) => (
+                  <tr key={sednica.ID ?? indeks}>
+                    <td>{sednica.Naziv}</td>
+                    <td>{sednica.Datum}</td>
+                    <td>{sednica.BrojPrisutnih}</td>
+                    <td>{sednica.StatusSednice}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td>Ne postoji sednica</td>
+                </tr>
+              )
+            ) : (
+              sednice.map((sednica, indeks) => (
+                <tr key={sednica.ID ?? indeks}>
+                  <td>{sednica.NazivSednice}</td>
+                  <td>{sednica.Datum}</td>
+                  <td>{sednica.BrojPrisutnih}</td>
+                  <td>{sednica.StatusSednice}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </article>
