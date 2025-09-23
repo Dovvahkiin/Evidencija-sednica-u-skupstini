@@ -6,6 +6,7 @@ import Pretraga from "../komponente/Pretraga";
 
 const PocetnaPrijavljen = () => {
   const [pretragaID, postaviPretragaID] = useState("");
+
   return (
     <main>
       <Header />

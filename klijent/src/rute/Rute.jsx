@@ -24,7 +24,7 @@ const ruter = createBrowserRouter([
     element: <Profil />,
   },
   {
-    path: "/sednice/:id",
+    path: "/sednica/:id",
     element: <Sednica />,
   },
 ]);

@@ -7,7 +7,9 @@ const NavigacijaPrijavljenAdmin = () => {
       <ul>
         <div className="opcijeNavigacije">
           <li>
-            <Link to="/">POČETNA</Link>
+            <Link to="/" reloadDocument>
+              POČETNA
+            </Link>
           </li>
           <li>
             <Link to="/">ADMIN OPCIJE</Link>
@@ -31,7 +33,9 @@ const NavigacijaPrijavljenKorisnik = () => {
       <ul>
         <div className="opcijeNavigacije">
           <li>
-            <Link to="/">POČETNA</Link>
+            <Link to="/" reloadDocument>
+              POČETNA
+            </Link>
           </li>
           <li>
             <Link to="/profil">PROFIL</Link>
