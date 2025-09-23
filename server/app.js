@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 const serverKonfiguracija = require("./konfiguracije/serverKonfiguracija");
 app.use(express.json());
 
-const sednicaRuter = require("./rute/SednicaRute.js");
+const sednicaRuter = require("./rute/sednicaRute.js");
 const dnevniRedRuter = require("./rute/dnevniRedRute.js");
 const korisnikRuter = require("./rute/korisnikRute.js");
 const autentikacijaRuter = require("./rute/autentikacioneRute.js");

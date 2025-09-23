@@ -7,7 +7,7 @@ module.exports = {
   nodePort,
   klijentPort,
   corsOptions: {
-    origin: [klijentPort + nodePort],
+    origin: ["http://localhost:5173"],
     method: ["GET", "POST"],
     credentials: true,
   },

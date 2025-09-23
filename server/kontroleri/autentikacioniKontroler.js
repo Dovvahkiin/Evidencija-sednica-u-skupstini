@@ -37,7 +37,7 @@ class AutentikacijaKontroler {
           status: podaciKorisnika.StatusKorisnika,
         },
         TAJNA,
-        { expiresIn: "2h" }
+        { expiresIn: "15m" }
       );
 
       res.cookie("token", token, {
