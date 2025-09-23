@@ -1,32 +1,37 @@
-import React from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import React from "react";
+import { createBrowserRouter } from "react-router-dom";
 
 // stranice
-import Pocetna from "../stranice/Pocetna"
-import Prijava from "../stranice/Prijava"
-import Profil from "../stranice/Profil"
-import Registracija from "../stranice/Registracija"
-import NijePronadjeno from "../stranice/NijePronadjeno"
-
+import Pocetna from "../stranice/Pocetna";
+import Prijava from "../stranice/Prijava";
+import Profil from "../stranice/Profil";
+import Registracija from "../stranice/Registracija";
+import NijePronadjeno from "../stranice/NijePronadjeno";
+import Sednica from "../stranice/Sednica";
 //funkcija routera
 
 const ruter = createBrowserRouter([
-    {
-        path: "/",
-        element: <Pocetna/>,
-        errorElement: <NijePronadjeno/>
-    },
-    {
-        path: "/Prijava",
-        element: <Prijava />
-    },    {
-        path: "/Profil",
-        element: <Profil />
-    },    {
-        path: "/Registracija",
-        element: <Registracija />
-    },
+  {
+    path: "/",
+    element: <Pocetna />,
+    errorElement: <NijePronadjeno />,
+  },
+  {
+    path: "/prijava",
+    element: <Prijava />,
+  },
+  {
+    path: "/profil",
+    element: <Profil />,
+  },
+  {
+    path: "/registracija",
+    element: <Registracija />,
+  },
+  {
+    path: "/sednice/:id",
+    element: <Sednica />,
+  },
+]);
 
-])
-
-export default ruter
+export default ruter;

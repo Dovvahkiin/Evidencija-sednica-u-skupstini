@@ -1,46 +1,75 @@
-:root{
-    /* Boje */
-    --siva : rgb(41, 41, 41);
-    --zelena : rgb(45, 78, 26);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+:root {
+  /* Boje */
+  --siva: rgb(41, 41, 41);
+  --zelena: rgb(45, 78, 26);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-body
-{
-    padding: 5%;
-    margin: 0;
-    background-color: var(--siva);
+body {
+  padding: 5%;
+  margin: 0;
+  background-color: var(--siva);
 }
 
-.okvirSajta
-{
-    background-color: var(--siva);
-    color: white;
-    border: 2px solid var(--zelena);
-    padding: 2%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.okvirSajta {
+  background-color: var(--siva);
+  color: white;
+  border: 2px solid var(--zelena);
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.tabelaPocetna
-{
-    width: 80%;
-    margin: 2%;
+.tabelaPocetna {
+  width: 80%;
+  margin: 2%;
 }
 
-.tabelaPocetna > table
-{
-    padding: 2%;
-    width: 100%;
+.tabelaPocetna > table {
+  padding: 2%;
+  width: 100%;
 }
-.tabelaPocetna > table, th,td
-{
-    border: 2px solid green;
-    border-collapse: collapse;
+.tabelaPocetna > table,
+th,
+td {
+  border: 2px solid green;
+  border-collapse: collapse;
 }
-.tabelaPocetna > tr,th,td
-{
-    padding: 1%
+.tabelaPocetna > tr,
+th,
+td {
+  padding: 1%;
+}
+
+/* Globalni stil linkova */
+
+a {
+  text-decoration: none;
+  color: greenyellow;
+}
+
+.vracanjeNijePronadjenoDugme {
+  border: 1px solid green;
+  padding: 10px;
+  margin-bottom: 5rem;
+}
+.vracanjeNijePronadjenoDugme:hover {
+  background-color: green;
+  border: none;
+  color: white;
+  transition: 0.2s ease;
+}
+
+/* Sednica stranica */
+
+.okvirSajta.sednica {
+  display: flex !important;
+  justify-content: start !important;
+  align-items: start !important;
+}
+.okvirSajta > .tackeDnevnogRedaSednica,
+.okvirSajta > .zapisnikSednica {
+  max-width: 700px;
 }
