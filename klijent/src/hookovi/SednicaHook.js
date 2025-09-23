@@ -51,6 +51,6 @@ export function VratiSednicuPoIDu(id) {
     };
     console.log(sednicaPoIDu);
     preuzmiSednicuPoIDu();
-  }, [id]);
+  }, [sednicaPoIDu, id]);
   return { sednicaPoIDu, ucitavanjePoIDu, greskaPoIDu };
 }
