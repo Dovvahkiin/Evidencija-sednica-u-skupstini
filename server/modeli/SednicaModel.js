@@ -78,8 +78,15 @@ class SednicaDetaljanPregledModel extends BazniModel {
   }
 }
 
+class TipoviStatusaSednice extends BazniModel {
+  constructor() {
+    super("status_sednice");
+  }
+}
+
 module.exports = {
   SednicaAkcijaModel,
   SednicaPregledModel,
   SednicaDetaljanPregledModel,
+  TipoviStatusaSednice,
 };

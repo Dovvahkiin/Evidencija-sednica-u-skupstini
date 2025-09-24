@@ -8,7 +8,11 @@ class SedniceServis extends KoriscenjeAxiosa {
 
   UcitajSednicuPoIDu = async (id) => {
     const { data } = await this.api.get(`/sednica/${id}`);
-    console.log(data);
+    return data;
+  };
+
+  UcitajSveTipove = async () => {
+    const { data } = await this.api.get("/tipovisednice");
     return data;
   };
 }

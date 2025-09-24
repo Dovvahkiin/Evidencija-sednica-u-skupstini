@@ -2,6 +2,7 @@ const {
   SednicaAkcijaModel,
   SednicaPregledModel,
   SednicaDetaljanPregledModel,
+  TipoviStatusaSednice,
 } = require("../modeli/SednicaModel.js");
 
 const { PoziviValidacija } = require("../validacije/validacijaSednice.js");
@@ -12,6 +13,7 @@ const instancaAkcijeSednice = new SednicaAkcijaModel();
 const instancaPregledaSednica = new SednicaPregledModel();
 const instancaDetaljnogPregledaSednice = new SednicaDetaljanPregledModel();
 const instancaDetalja = new DetaljiPodatakaClanova();
+const instancaTipaStatusa = new TipoviStatusaSednice();
 
 class SednicaKontroler {
   async PregledSvihSednica(req, res) {
@@ -152,6 +154,21 @@ class SednicaKontroler {
     } catch (greska) {
       console.error(greska);
       res.status(500).json({ Greska: greska });
+    }
+  }
+
+  async PregledSvihStatusaSednica(req, res) {
+    const tipoviSednice = await instancaTipaStatusa.vratiSve();
+    try {
+      if (tipoviSednice.length === 0) {
+        return res.status(404).json({
+          Akcija: false,
+          Poruka: "Ne postoji tip!",
+        });
+      } else return res.status(200).json({ tipoviSednice });
+    } catch (greska) {
+      console.error(greska);
+      return res.status(404).json({ Akcija: false, greska });
     }
   }
 }

@@ -55,3 +55,25 @@ export function VratiSednicuPoIDu(id) {
   }, [id]);
   return { sednicaPoIDu, ucitavanjePoIDu, greskaPoIDu };
 }
+
+export function VratiTipoveSednice() {
+  const [tipoviSednice, postaviTip] = useState(null);
+  const [ucitavanjeTipova, PostaviUcitavanje] = useState(false);
+  const [greskaTipova, postaviGresku] = useState(null);
+
+  useEffect(() => {
+    const preuzmiTipove = async () => {
+      PostaviUcitavanje(true);
+      try {
+        const podaci = await instanceSednice.UcitajSveTipove();
+        postaviTip(podaci.tipoviSednice);
+      } catch (greska) {
+        postaviGresku(greska);
+      } finally {
+        PostaviUcitavanje(false);
+      }
+    };
+    preuzmiTipove();
+  }, []);
+  return { tipoviSednice, ucitavanjeTipova, greskaTipova };
+}

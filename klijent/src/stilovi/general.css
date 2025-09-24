@@ -173,3 +173,17 @@ label {
 .unosPolje.reg input {
   margin-right: 7%;
 }
+
+.unosPolje.sednica {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.unosPolje.sednica > label,
+.unosPolje.sednica > input {
+  display: flex;
+  flex: 0 !important;
+}
