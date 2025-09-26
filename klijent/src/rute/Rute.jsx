@@ -34,7 +34,7 @@ const ruter = createBrowserRouter([
     element: <KreirajSednicu />,
   },
   {
-    path: "/izmenisednicu",
+    path: "/sednica/:id/izmenisednicu",
     element: <IzmeniSednicu />,
   },
 ]);

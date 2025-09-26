@@ -66,22 +66,14 @@ class ValidacijaSednice {
       }
     }
     if (StatusSedniceID) {
-      if (
-        StatusSedniceID > 4 ||
-        StatusSedniceID < 1 ||
-        StatusSedniceID.trim() === ""
-      ) {
+      if (StatusSedniceID > 4 || StatusSedniceID < 1) {
         greske.push(
           "Status ne moze biti veci od 4 ili manji od 1 ili prazan ili samo razmaci \n"
         );
       }
     }
     if (BrojPrisutnih) {
-      if (
-        BrojPrisutnih > clanovi ||
-        BrojPrisutnih < 0 ||
-        BrojPrisutnih.trim() === ""
-      ) {
+      if (BrojPrisutnih > clanovi || BrojPrisutnih < 0) {
         greske.push(
           "Broj prisutnih ne moze biti veci od: " +
             clanovi +

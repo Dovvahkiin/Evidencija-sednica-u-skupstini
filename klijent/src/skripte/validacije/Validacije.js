@@ -16,7 +16,6 @@ export const ValidacijaSednice = (podaci = {}) => {
 
   if (
     !BrojPrisutnih ||
-    BrojPrisutnih.trim() === "" ||
     BrojPrisutnih > clanovi.ukupanBrojClanova ||
     BrojPrisutnih < 0
   ) {
@@ -27,12 +26,7 @@ export const ValidacijaSednice = (podaci = {}) => {
     );
   }
 
-  if (
-    !StatusSedniceID ||
-    StatusSedniceID > 4 ||
-    StatusSedniceID < 1 ||
-    StatusSedniceID.trim() === ""
-  ) {
+  if (!StatusSedniceID || StatusSedniceID > 4 || StatusSedniceID < 1) {
     greske.push("Status ne moze biti veci od 4 ili manji od 1 ili prazan\n");
   }
 

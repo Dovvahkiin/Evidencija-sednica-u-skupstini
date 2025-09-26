@@ -65,7 +65,7 @@ start transaction;
 	set StatusSedniceIDFinalno = StatusSedniceIDParametar;
 	
 	if trenutniStatusSednice = 2 or trenutniStatusSednice = 3  and StatusSedniceIDFinalno = 1 or StatusSedniceIDFinalno = 4
-	then set ZapisnikSedniceFinalno = null;
+	then set ZapisnikSedniceFinalno = "";
 	end if;
 	
 	update evidencijasednica.sednica

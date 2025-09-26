@@ -2,9 +2,10 @@ create view detaljanPregledSednice as
 select
 	sednica.IDSednice as ID,
 	sednica.NazivSednice as Naziv,
-	DATE_FORMAT(sednica.DatumSednice, '%d.%m.%Y') as Datum,
+	DATE_FORMAT(sednica.DatumSednice, '%Y-%m-%d') as Datum,
 	sednica.BrojPrisutnih as BrojPrisutnih,
 	sednica.ZapisnikSednice as Zapisnik,
+	sednica.StatusSedniceID as StatusID,
 	status.NazivStatusaSednice as StatusSednice,
 	tacka.TekstTacke as DnevniRed
 from evidencijasednica.sednica sednica

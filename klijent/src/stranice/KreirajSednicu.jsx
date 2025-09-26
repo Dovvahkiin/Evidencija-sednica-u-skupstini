@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Footer from "../komponente/Footer";
 import Header from "../komponente/Header/Header";
-import { VratiTipoveSednice } from "../hookovi/SednicaHook";
 import { brojacPrisutnih } from "../skripte/brojac";
-import { KreiranjeSednice } from "../hookovi/SednicaHook";
+import { OpcijeSednice, VratiTipoveSednice } from "../hookovi/SednicaHook";
 import { ValidacijaSednice } from "../skripte/validacije/Validacije";
 
 import DatePicker from "react-datepicker";
@@ -23,7 +22,7 @@ function KreirajSednicu() {
     ZapisnikSednice: "",
   });
 
-  const { KreiranjeNoveSednice, greskaKreiranja } = KreiranjeSednice();
+  const { KreiranjeNoveSednice, greska } = OpcijeSednice();
 
   const UnosVrednosti = (e) => {
     PostaviNovuSednicu({ ...novaSednica, [e.target.name]: e.target.value });
@@ -65,10 +64,8 @@ function KreirajSednicu() {
       <form className="okvirSajta" onSubmit={KreirajSednicuForma}>
         <h1>KREIRANJE NOVE SEDNICE</h1>
         <div className="prijavaStranica">
-          {greskaKreiranja && (
-            <p style={{ textAlign: "center", color: "red" }}>
-              {greskaKreiranja}
-            </p>
+          {greska && (
+            <p style={{ textAlign: "center", color: "red" }}>{greska}</p>
           )}
 
           <div className="unosPolje sednica">

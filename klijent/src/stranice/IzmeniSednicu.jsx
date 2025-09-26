@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import Footer from "../komponente/Footer";
 import Header from "../komponente/Header/Header";
-import { VratiTipoveSednice } from "../hookovi/SednicaHook";
+import {
+  VratiTipoveSednice,
+  VratiSednicuPoIDu,
+  OpcijeSednice,
+} from "../hookovi/SednicaHook";
 import { brojacPrisutnih } from "../skripte/brojac";
-import { KreiranjeSednice } from "../hookovi/SednicaHook";
 import { ValidacijaSednice } from "../skripte/validacije/Validacije";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-function KreirajSednicu() {
+function IzmeniSednicu() {
   const [datum, PostaviDatum] = useState(new Date());
   const { tipoviSednice } = VratiTipoveSednice();
   const brojeviZaIzbor = brojacPrisutnih();
-
+  const { id } = useParams();
+  const { sednicaPoIDu } = VratiSednicuPoIDu(id);
   const [novaSednica, PostaviNovuSednicu] = useState({
     NazivSednice: "",
     DatumSednice: "",
@@ -22,9 +27,11 @@ function KreirajSednicu() {
     StatusSedniceID: "",
     ZapisnikSednice: "",
   });
+  const navigacija = useNavigate();
 
-  const { KreiranjeNoveSednice, novaSednicaKreiranje, greskaKreiranja } =
-    KreiranjeSednice();
+  const { IzmenaSednice, greska } = OpcijeSednice();
+
+  const detaljiSednice = sednicaPoIDu?.[0];
 
   const UnosVrednosti = (e) => {
     PostaviNovuSednicu({ ...novaSednica, [e.target.name]: e.target.value });
@@ -34,10 +41,10 @@ function KreirajSednicu() {
     PostaviDatum(datum);
     const noviDatum = datum.toISOString().split("T")[0];
     PostaviNovuSednicu({ ...novaSednica, DatumSednice: noviDatum });
+    return noviDatum;
   };
 
-  const navigacija = useNavigate();
-  const KreirajSednicuForma = async (e) => {
+  const IzmeniForma = async (e) => {
     e.preventDefault();
     const rezultatValidacije = ValidacijaSednice(novaSednica);
     console.log(rezultatValidacije);
@@ -45,14 +52,7 @@ function KreirajSednicu() {
       return alert(rezultatValidacije);
     }
     try {
-      await KreiranjeNoveSednice(novaSednica);
-      PostaviNovuSednicu({
-        NazivSednice: "",
-        DatumSednice: "",
-        BrojPrisutnih: "",
-        StatusSedniceID: "",
-        ZapisnikSednice: "",
-      });
+      await IzmenaSednice(id, novaSednica);
     } catch (greska) {
       return greska;
     } finally {
@@ -60,16 +60,27 @@ function KreirajSednicu() {
       navigacija("/");
     }
   };
+
+  useEffect(() => {
+    if (detaljiSednice && detaljiSednice.ID !== undefined) {
+      PostaviNovuSednicu({
+        NazivSednice: String(detaljiSednice.Naziv),
+        BrojPrisutnih: detaljiSednice.BrojPrisutnih,
+        StatusSedniceID: detaljiSednice.StatusID,
+        ZapisnikSednice: String(detaljiSednice.Zapisnik),
+        DatumSednice: String(detaljiSednice.Datum),
+      });
+    }
+    console.log(detaljiSednice);
+  }, [detaljiSednice]);
   return (
     <main>
       <Header />
-      <form className="okvirSajta" onSubmit={KreirajSednicuForma}>
-        <h1>KREIRANJE NOVE SEDNICE</h1>
+      <form className="okvirSajta" onSubmit={IzmeniForma}>
+        <h1>IZMENI POSTOJEĆU SEDNICU</h1>
         <div className="prijavaStranica">
-          {greskaKreiranja && (
-            <p style={{ textAlign: "center", color: "red" }}>
-              {greskaKreiranja}
-            </p>
+          {greska && (
+            <p style={{ textAlign: "center", color: "red" }}>{greska}</p>
           )}
 
           <div className="unosPolje sednica">
@@ -150,7 +161,7 @@ function KreirajSednicu() {
             </select>
           </div>
           <div className="unosPolje">
-            <button type="submit">Kreiraj Sednicu</button>
+            <button type="submit">Izmeni Sednicu</button>
           </div>
         </div>
       </form>
@@ -159,4 +170,4 @@ function KreirajSednicu() {
   );
 }
 
-export default KreirajSednicu;
+export default IzmeniSednicu;

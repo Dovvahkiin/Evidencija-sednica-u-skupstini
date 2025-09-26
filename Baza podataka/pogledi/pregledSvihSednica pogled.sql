@@ -9,4 +9,5 @@ select
 from
 	sednica sed
 join
-evidencijasednica.status_sednice statsed on	sed.StatusSedniceID = statsed.IDStatusaSednice ;
+evidencijasednica.status_sednice statsed on	sed.StatusSedniceID = statsed.IDStatusaSednice
+ORDER BY ID ASC;

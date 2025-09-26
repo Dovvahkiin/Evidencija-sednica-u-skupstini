@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import SedniceServis from "../servisi/SedniceServis";
 import { ValidacijaSednice } from "../skripte/validacije/Validacije";
@@ -51,7 +50,6 @@ export function VratiSednicuPoIDu(id) {
         PostaviUcitavanje(false);
       }
     };
-    console.log(sednicaPoIDu);
     preuzmiSednicuPoIDu();
   }, [id]);
   return { sednicaPoIDu, ucitavanjePoIDu, greskaPoIDu };
@@ -79,10 +77,10 @@ export function VratiTipoveSednice() {
   return { tipoviSednice, ucitavanjeTipova, greskaTipova };
 }
 
-export function KreiranjeSednice() {
-  const [novaSednicaKreiranje, PostaviSednicu] = useState(null);
-  const [ucitavanjeKreiranja, PostaviUcitavanje] = useState(false);
-  const [greskaKreiranja, PostaviGresku] = useState(null);
+export function OpcijeSednice() {
+  const [sednica, PostaviSednicu] = useState(null);
+  const [ucitavanje, PostaviUcitavanje] = useState(false);
+  const [greska, PostaviGresku] = useState(null);
 
   const KreiranjeNoveSednice = async (podaci) => {
     PostaviUcitavanje(true);
@@ -91,21 +89,40 @@ export function KreiranjeSednice() {
       const odgovor = await instanceSednice.DodajNovuSednicu(podaci);
       if (odgovor.data.Uspeh) {
         PostaviSednicu(odgovor.data.napraviNovuSednicu);
-        return novaSednicaKreiranje;
+        return sednica;
       }
     } catch (greska) {
       PostaviGresku(greska.response.data.Greska); //response.data je iz axiosa ne moze biti preimenovano
-      console.log(greskaKreiranja);
-      return greskaKreiranja;
+      console.log(greska);
+      return greska;
+    } finally {
+      PostaviUcitavanje(false);
+    }
+  };
+
+  const IzmenaSednice = async (id, podaci) => {
+    PostaviUcitavanje(true);
+    PostaviGresku(null);
+    try {
+      const odgovor = await instanceSednice.IzmeniPostojecuSednicu(id, podaci);
+      if (odgovor.data.Uspeh) {
+        PostaviSednicu(odgovor.data.rezultatIzmene);
+        return sednica;
+      }
+    } catch (greska) {
+      PostaviGresku(greska.response.data);
+      console.log(greska);
+      return greska;
     } finally {
       PostaviUcitavanje(false);
     }
   };
 
   return {
+    IzmenaSednice,
     KreiranjeNoveSednice,
-    ucitavanjeKreiranja,
-    greskaKreiranja,
-    novaSednicaKreiranje,
+    ucitavanje,
+    greska,
+    sednica,
   };
 }
