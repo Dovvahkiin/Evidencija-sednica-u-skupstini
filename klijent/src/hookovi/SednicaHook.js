@@ -14,6 +14,7 @@ export function VratiSednice() {
       try {
         const podaci = await instanceSednice.UcitajSednice(); // vraca objekat u kome stoje iz backenda {akcija:..., pregledSvihSednica: [sednice]}
         PostaviSednice(podaci.pregledajSveSednice);
+        return true;
       } catch (greskica) {
         PostaviGresku(greskica.message || "Greska pri ucitavanje sednica");
       } finally {
@@ -23,7 +24,7 @@ export function VratiSednice() {
     preuzmiSednice();
   }, []);
 
-  return { sednice, ucitavanje, greska };
+  return { sednice, ucitavanje, greska, PostaviSednice };
 }
 export function VratiSednicuPoIDu(id) {
   const [sednicaPoIDu, PostaviSednice] = useState(null);
@@ -78,7 +79,7 @@ export function VratiTipoveSednice() {
 }
 
 export function OpcijeSednice() {
-  const [sednica, PostaviSednicu] = useState(null);
+  const [sednica, PostaviSednicu] = useState([]);
   const [ucitavanje, PostaviUcitavanje] = useState(false);
   const [greska, PostaviGresku] = useState(null);
 
@@ -118,7 +119,26 @@ export function OpcijeSednice() {
     }
   };
 
+  const BrisanjeSednice = async (id) => {
+    PostaviUcitavanje(true);
+    PostaviGresku(null);
+    try {
+      const odgovor = await instanceSednice.ObrisiPostojecuSednicu(id);
+
+      PostaviSednicu((prethodna) =>
+        prethodna.filter((sednica) => sednica.ID !== id)
+      );
+      return odgovor.data;
+    } catch (greska) {
+      PostaviGresku(greska.response.data);
+      return greska;
+    } finally {
+      PostaviUcitavanje(false);
+    }
+  };
+
   return {
+    BrisanjeSednice,
     IzmenaSednice,
     KreiranjeNoveSednice,
     ucitavanje,

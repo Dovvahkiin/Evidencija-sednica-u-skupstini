@@ -16,13 +16,17 @@ class SedniceServis extends KoriscenjeAxiosa {
     return data;
   };
   DodajNovuSednicu = async (podaciUnosa) => {
-    const odogvor = await this.api.post("/sednice", podaciUnosa);
-    return odogvor.data;
+    const data = await this.api.post("/sednice", podaciUnosa);
+    return { data };
   };
   IzmeniPostojecuSednicu = async (id, podaci) => {
-    const odgovor = await this.api.put(`/sednica/${id}`, podaci);
-    console.log(odgovor.data);
-    return odgovor.data;
+    const { data } = await this.api.put(`/sednica/${id}`, podaci);
+    console.log(data);
+    return data;
+  };
+  ObrisiPostojecuSednicu = async (id) => {
+    const { data } = await this.api.delete(`/sednica/${id}`);
+    return data;
   };
 }
 

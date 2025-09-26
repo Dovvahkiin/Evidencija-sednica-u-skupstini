@@ -3,15 +3,21 @@ import TabelaPregled from "../komponente/tabele/TabelaPregled";
 import Header from "../komponente/Header/Header";
 import Footer from "../komponente/Footer";
 import Pretraga from "../komponente/Pretraga";
+import { VratiSednice } from "../hookovi/SednicaHook";
 
 const PocetnaPrijavljen = () => {
   const [pretragaID, postaviPretragaID] = useState("");
+  const { greska } = VratiSednice();
 
   return (
     <main>
       <Header />
       <section className="okvirSajta">
-        <Pretraga elementPretrage={postaviPretragaID} />
+        {greska == null ? (
+          <Pretraga elementPretrage={postaviPretragaID} />
+        ) : (
+          <></>
+        )}
         <TabelaPregled PretragaPoIDu={pretragaID} />
         <Footer />
       </section>

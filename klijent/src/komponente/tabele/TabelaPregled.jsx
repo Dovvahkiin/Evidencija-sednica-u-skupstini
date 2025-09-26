@@ -1,15 +1,32 @@
 import React from "react";
-import { VratiSednice, VratiSednicuPoIDu } from "../../hookovi/SednicaHook";
+import {
+  VratiSednice,
+  VratiSednicuPoIDu,
+  OpcijeSednice,
+} from "../../hookovi/SednicaHook";
 import { useNavigate } from "react-router-dom";
 
 function TabelaPregled({ PretragaPoIDu }) {
-  const { sednice, ucitavanje, greska } = VratiSednice();
+  const { sednice, ucitavanje, greska, PostaviSednice } = VratiSednice();
   const { sednicaPoIDu, ucitavanjePoIdu, greskaPoIdu } =
     VratiSednicuPoIDu(PretragaPoIDu);
+  const { BrisanjeSednice } = OpcijeSednice();
+
   const navigacija = useNavigate();
 
+  const SrediKlik = async (e, id) => {
+    e.preventDefault();
+    await BrisanjeSednice(id);
+    alert("Sednica je uspesno obrisana!");
+    PostaviSednice((prethodna) =>
+      prethodna.filter((sednica) => sednica.ID !== id)
+    );
+    window.location.reload();
+  };
+
   if (ucitavanje || ucitavanjePoIdu) return <p>Ucitavanje...</p>;
-  if (greska || greskaPoIdu) return <p>Greska: {greska || greskaPoIdu}</p>;
+  if (greska || greskaPoIdu)
+    return <p style={{ color: "red" }}>Ni jedna sednica nije kreirana</p>;
 
   return (
     <>
@@ -48,7 +65,9 @@ function TabelaPregled({ PretragaPoIDu }) {
                       </button>
                     </td>
                     <td>
-                      <button>Obrisi</button>
+                      <button onClick={(e) => SrediKlik(e, sednica.ID)}>
+                        Obrisi
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -84,7 +103,9 @@ function TabelaPregled({ PretragaPoIDu }) {
                     </button>
                   </td>
                   <td>
-                    <button>Obrisi</button>
+                    <button onClick={(e) => SrediKlik(e, sednica.ID)}>
+                      Obrisi
+                    </button>
                   </td>
                 </tr>
               ))
