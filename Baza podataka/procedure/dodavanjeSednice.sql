@@ -52,7 +52,7 @@ end if;
 	end if;
 end if;
 
-	if ograniciStatus = 1 or ograniciStatus = 4
+	if ograniciStatus = 1 or ograniciStatus = 3 or ograniciStatus = 4
 	then
 	set ZapisnikFinalno = "";
 	end if;

@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import SedniceServis from "../servisi/SedniceServis";
+import { ValidacijaSednice } from "../skripte/validacije/Validacije";
 
 const instanceSednice = new SedniceServis();
 
@@ -76,4 +77,35 @@ export function VratiTipoveSednice() {
     preuzmiTipove();
   }, []);
   return { tipoviSednice, ucitavanjeTipova, greskaTipova };
+}
+
+export function KreiranjeSednice() {
+  const [novaSednicaKreiranje, PostaviSednicu] = useState(null);
+  const [ucitavanjeKreiranja, PostaviUcitavanje] = useState(false);
+  const [greskaKreiranja, PostaviGresku] = useState(null);
+
+  const KreiranjeNoveSednice = async (podaci) => {
+    PostaviUcitavanje(true);
+    PostaviGresku(null);
+    try {
+      const odgovor = await instanceSednice.DodajNovuSednicu(podaci);
+      if (odgovor.data.Uspeh) {
+        PostaviSednicu(odgovor.data.napraviNovuSednicu);
+        return novaSednicaKreiranje;
+      }
+    } catch (greska) {
+      PostaviGresku(greska.response.data.Greska); //response.data je iz axiosa ne moze biti preimenovano
+      console.log(greskaKreiranja);
+      return greskaKreiranja;
+    } finally {
+      PostaviUcitavanje(false);
+    }
+  };
+
+  return {
+    KreiranjeNoveSednice,
+    ucitavanjeKreiranja,
+    greskaKreiranja,
+    novaSednicaKreiranje,
+  };
 }

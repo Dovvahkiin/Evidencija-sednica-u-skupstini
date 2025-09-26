@@ -16,6 +16,7 @@ function TabelaPregled({ PretragaPoIDu }) {
         <table>
           <thead>
             <tr>
+              <th>ID Sednice:</th>
               <th>Naziv sednice:</th>
               <th>Datum sednice:</th>
               <th>Broj prisutnih:</th>
@@ -27,6 +28,7 @@ function TabelaPregled({ PretragaPoIDu }) {
               sednicaPoIDu ? (
                 sednicaPoIDu.map((sednica, indeks) => (
                   <tr key={sednica.ID ?? indeks}>
+                    <td>{sednica.ID ?? indeks}</td>
                     <td>
                       <a href={`/sednica/${sednica.ID}`}>{sednica.Naziv}</a>
                     </td>
@@ -43,6 +45,7 @@ function TabelaPregled({ PretragaPoIDu }) {
             ) : (
               sednice.map((sednica, indeks) => (
                 <tr key={sednica.ID ?? indeks}>
+                  <td>{sednica.ID ?? indeks}</td>
                   <td>
                     <a href={`/sednica/${sednica.ID}`}>
                       {sednica.NazivSednice}

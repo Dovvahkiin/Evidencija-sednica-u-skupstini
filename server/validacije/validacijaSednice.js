@@ -1,9 +1,5 @@
-const {
-  DetaljiPodatakaClanova,
-  UcitavanjeClanova,
-} = require("../poslovnaPravila/kvorum.js");
+const { UcitavanjeClanova } = require("../poslovnaPravila/kvorum.js");
 
-const instancaDetalja = new DetaljiPodatakaClanova();
 const instancaClanova = new UcitavanjeClanova();
 
 class ValidacijaSednice {

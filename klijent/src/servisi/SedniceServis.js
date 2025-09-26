@@ -15,6 +15,10 @@ class SedniceServis extends KoriscenjeAxiosa {
     const { data } = await this.api.get("/tipovisednice");
     return data;
   };
+  DodajNovuSednicu = async (podaciUnosa) => {
+    const odogvor = await this.api.post("/sednice", podaciUnosa);
+    return odogvor.data;
+  };
 }
 
 export default SedniceServis;
