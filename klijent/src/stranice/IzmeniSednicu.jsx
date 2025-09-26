@@ -56,8 +56,8 @@ function IzmeniSednicu() {
     } catch (greska) {
       return greska;
     } finally {
-      alert("Sednica uspesno kreirana");
-      navigacija("/");
+      alert("Sednica uspesno izmenjena");
+      navigacija(`/sednica/${id}`);
     }
   };
 

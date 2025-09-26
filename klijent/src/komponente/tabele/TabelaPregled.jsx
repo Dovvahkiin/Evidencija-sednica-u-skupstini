@@ -38,11 +38,28 @@ function TabelaPregled({ PretragaPoIDu }) {
                     <td>{sednica.Datum}</td>
                     <td>{sednica.BrojPrisutnih}</td>
                     <td>{sednica.StatusSednice}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          navigacija(`/sednica/${sednica.ID}/izmenisednicu`);
+                        }}
+                      >
+                        Izmeni
+                      </button>
+                    </td>
+                    <td>
+                      <button>Obrisi</button>
+                    </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td>Ne postoji sednica</td>
+                  <td
+                    style={{ color: "violet", textAlign: "center" }}
+                    colSpan={6}
+                  >
+                    Sednica koju pokusavate da pronadjete ne postoji.
+                  </td>
                 </tr>
               )
             ) : (
