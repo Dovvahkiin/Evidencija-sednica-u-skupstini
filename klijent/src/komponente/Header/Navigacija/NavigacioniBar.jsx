@@ -12,7 +12,7 @@ const NavigacijaPrijavljenAdmin = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">ADMIN OPCIJE</Link>
+            <Link to="/kreirajsednicu">DODAJ SEDNICU</Link>
           </li>
           <li>
             <Link to="/profil">PROFIL</Link>
