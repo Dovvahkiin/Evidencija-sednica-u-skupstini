@@ -2,7 +2,7 @@ class ValidacijaDnevnogReda {
   async ValidirajDnevniRed(unos) {
     let greska = [];
 
-    if (!unos || unos.trim() === "") {
+    if (!unos) {
       greska.push("Tekst tacke ne moze biti prazan.\n");
     }
     return greska;

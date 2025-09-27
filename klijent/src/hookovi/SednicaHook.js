@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import SedniceServis from "../servisi/SedniceServis";
-import { ValidacijaSednice } from "../skripte/validacije/Validacije";
 
 const instanceSednice = new SedniceServis();
 

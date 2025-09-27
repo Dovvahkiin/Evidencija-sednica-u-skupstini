@@ -21,7 +21,6 @@ class SedniceServis extends KoriscenjeAxiosa {
   };
   IzmeniPostojecuSednicu = async (id, podaci) => {
     const { data } = await this.api.put(`/sednica/${id}`, podaci);
-    console.log(data);
     return data;
   };
   ObrisiPostojecuSednicu = async (id) => {

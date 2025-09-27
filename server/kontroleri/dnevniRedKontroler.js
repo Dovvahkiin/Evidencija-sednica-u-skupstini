@@ -7,7 +7,7 @@ const instancaValidacije = new PoziviValidacija();
 class DnevniRedKontroler {
   async KreiranjeDnevnogReda(req, res) {
     const ID = parseInt(req.params.id, 10);
-    const TekstTacke = req.body.TekstTacke;
+    const { TekstTacke } = req.body;
     const rezultatValidacije = await instancaValidacije.ValidacijaPodataka(
       TekstTacke
     );
@@ -37,7 +37,7 @@ class DnevniRedKontroler {
 
   async AzuriranjeDnevnogReda(req, res) {
     const ID = parseInt(req.params.id, 10);
-    const TekstTacke = req.body.TekstTacke;
+    const { TekstTacke } = req.body;
     const rezultatValidacije = await instancaValidacije.ValidacijaPodataka(
       TekstTacke
     );

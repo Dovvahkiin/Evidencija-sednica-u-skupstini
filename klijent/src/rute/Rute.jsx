@@ -7,8 +7,11 @@ import Prijava from "../stranice/Prijava";
 import Profil from "../stranice/Profil";
 import NijePronadjeno from "../stranice/NijePronadjeno";
 import Sednica from "../stranice/Sednica";
-import KreirajSednicu from "../stranice/KreirajSednicu";
-import IzmeniSednicu from "../stranice/IzmeniSednicu";
+import KreirajSednicu from "../stranice/adminSednica/KreirajSednicu";
+import IzmeniSednicu from "../stranice/adminSednica/IzmeniSednicu";
+import DodajDnevniRed from "../stranice/adminSednica/DodajDnevniRed";
+import IzmeniDnevniRed from "../stranice/adminSednica/IzmeniDnevniRed";
+
 //funkcija routera
 
 const ruter = createBrowserRouter([
@@ -36,6 +39,14 @@ const ruter = createBrowserRouter([
   {
     path: "/sednica/:id/izmenisednicu",
     element: <IzmeniSednicu />,
+  },
+  {
+    path: "/sednica/:id/dodajdnevnired",
+    element: <DodajDnevniRed />,
+  },
+  {
+    path: "/sednica/:id/izmenidnevnired",
+    element: <IzmeniDnevniRed />,
   },
 ]);
 

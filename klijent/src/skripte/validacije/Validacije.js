@@ -33,3 +33,13 @@ export const ValidacijaSednice = (podaci = {}) => {
   if (greske.length > 0) return greske;
   else return false;
 };
+
+export const ValidacijaDnevnogReda = (tekst) => {
+  const greske = [];
+
+  if (!tekst || tekst.trim() === "") {
+    greske.push("Dnevni red ne moze biti prazan!");
+  }
+  if (greske.length > 0) return greske;
+  else return false;
+};

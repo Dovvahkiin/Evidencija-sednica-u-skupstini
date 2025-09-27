@@ -1,25 +1,19 @@
 import React, { useState } from "react";
-import Footer from "../komponente/Footer";
-import Header from "../komponente/Header/Header";
-import {
-  VratiTipoveSednice,
-  VratiSednicuPoIDu,
-  OpcijeSednice,
-} from "../hookovi/SednicaHook";
-import { brojacPrisutnih } from "../skripte/brojac";
-import { ValidacijaSednice } from "../skripte/validacije/Validacije";
+import Footer from "../../komponente/Footer";
+import Header from "../../komponente/Header/Header";
+import { brojacPrisutnih } from "../../skripte/brojac";
+import { OpcijeSednice, VratiTipoveSednice } from "../../hookovi/SednicaHook";
+import { ValidacijaSednice } from "../../skripte/validacije/Validacije";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-function IzmeniSednicu() {
+function KreirajSednicu() {
   const [datum, PostaviDatum] = useState(new Date());
   const { tipoviSednice } = VratiTipoveSednice();
   const brojeviZaIzbor = brojacPrisutnih();
-  const { id } = useParams();
-  const { sednicaPoIDu } = VratiSednicuPoIDu(id);
+
   const [novaSednica, PostaviNovuSednicu] = useState({
     NazivSednice: "",
     DatumSednice: "",
@@ -27,11 +21,8 @@ function IzmeniSednicu() {
     StatusSedniceID: "",
     ZapisnikSednice: "",
   });
-  const navigacija = useNavigate();
 
-  const { IzmenaSednice, greska } = OpcijeSednice();
-
-  const detaljiSednice = sednicaPoIDu?.[0];
+  const { KreiranjeNoveSednice, greska } = OpcijeSednice();
 
   const UnosVrednosti = (e) => {
     PostaviNovuSednicu({ ...novaSednica, [e.target.name]: e.target.value });
@@ -41,10 +32,10 @@ function IzmeniSednicu() {
     PostaviDatum(datum);
     const noviDatum = datum.toISOString().split("T")[0];
     PostaviNovuSednicu({ ...novaSednica, DatumSednice: noviDatum });
-    return noviDatum;
   };
 
-  const IzmeniForma = async (e) => {
+  const navigacija = useNavigate();
+  const KreirajSednicuForma = async (e) => {
     e.preventDefault();
     const rezultatValidacije = ValidacijaSednice(novaSednica);
     console.log(rezultatValidacije);
@@ -52,32 +43,26 @@ function IzmeniSednicu() {
       return alert(rezultatValidacije);
     }
     try {
-      await IzmenaSednice(id, novaSednica);
+      await KreiranjeNoveSednice(novaSednica);
+      PostaviNovuSednicu({
+        NazivSednice: "",
+        DatumSednice: "",
+        BrojPrisutnih: "",
+        StatusSedniceID: "",
+        ZapisnikSednice: "",
+      });
     } catch (greska) {
       return greska;
     } finally {
-      alert("Sednica uspesno izmenjena");
-      navigacija(`/sednica/${id}`);
+      alert("Sednica uspesno kreirana");
+      navigacija("/");
     }
   };
-
-  useEffect(() => {
-    if (detaljiSednice && detaljiSednice.ID !== undefined) {
-      PostaviNovuSednicu({
-        NazivSednice: String(detaljiSednice.Naziv),
-        BrojPrisutnih: detaljiSednice.BrojPrisutnih,
-        StatusSedniceID: detaljiSednice.StatusID,
-        ZapisnikSednice: String(detaljiSednice.Zapisnik),
-        DatumSednice: String(detaljiSednice.Datum),
-      });
-    }
-    console.log(detaljiSednice);
-  }, [detaljiSednice]);
   return (
     <main>
       <Header />
-      <form className="okvirSajta" onSubmit={IzmeniForma}>
-        <h1>IZMENI POSTOJEĆU SEDNICU</h1>
+      <form className="okvirSajta" onSubmit={KreirajSednicuForma}>
+        <h1>KREIRANJE NOVE SEDNICE</h1>
         <div className="prijavaStranica">
           {greska && (
             <p style={{ textAlign: "center", color: "red" }}>{greska}</p>
@@ -161,7 +146,7 @@ function IzmeniSednicu() {
             </select>
           </div>
           <div className="unosPolje">
-            <button type="submit">Izmeni Sednicu</button>
+            <button type="submit">Kreiraj Sednicu</button>
           </div>
         </div>
       </form>
@@ -170,4 +155,4 @@ function IzmeniSednicu() {
   );
 }
 
-export default IzmeniSednicu;
+export default KreirajSednicu;
