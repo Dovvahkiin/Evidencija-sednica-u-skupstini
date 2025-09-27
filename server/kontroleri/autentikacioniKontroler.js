@@ -2,6 +2,7 @@ const { KorisnickiModel } = require("../modeli/korisnickiModel.js");
 const { ValidacijaKorisnika } = require("../validacije/validacijaKorisnika.js");
 const jwt = require("jsonwebtoken");
 const TAJNA = process.env.TAJNA_SESIJE;
+const OSVEZI = process.env.OSVEZI_SESIJU;
 
 const instancaValidacijeKorisnika = new ValidacijaKorisnika();
 const instancaKorisnika = new KorisnickiModel();
@@ -13,7 +14,7 @@ class AutentikacijaKontroler {
       await instancaValidacijeKorisnika.ValidirajPrijavu(podaci);
 
     if (rezultatValidacije.length > 0) {
-      return res.status(400).json({ Greske: rezultatValidacije });
+      return res.status(400).json({ Greska: rezultatValidacije });
     }
 
     try {
@@ -27,7 +28,9 @@ class AutentikacijaKontroler {
 
       if (!podaciKorisnika || podaciKorisnika.length === 0) {
         console.log("Pogresan email ili lozinka");
-        return res.status(500).json({ Greska: "Netacni podaci prijave." });
+        return res
+          .status(401)
+          .json({ Uspeh: false, Greska: "Pogresan email ili lozinka" });
       }
 
       const token = jwt.sign(
@@ -43,15 +46,21 @@ class AutentikacijaKontroler {
       res.cookie("token", token, {
         httpOnly: true,
         secure: false,
+        maxAge: 15 * 60 * 1000, // 15 minuta
       });
 
       console.log(
         "Korisnik " + podaciKorisnika.ImeKorisnika + " je uspesno prijavljen."
       );
-      res.status(200).json({ Uspeh: true, token });
+      res.status(200).json({ Uspeh: true, email, token });
     } catch (greska) {
       return res.status(500).json({ Greska: "Greska na serveru!", greska });
     }
+  };
+
+  OdjavaKorisnika = async (req, res) => {
+    res.clearCookie("token");
+    return res.status(200).json({ Poruka: "Uspesno ste se odjavili!" });
   };
 }
 

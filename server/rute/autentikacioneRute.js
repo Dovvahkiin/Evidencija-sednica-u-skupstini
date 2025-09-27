@@ -14,10 +14,6 @@ ruter.post(
   instancaAutentikacionogKontrolera.PrijavaKorisnika
 );
 
-ruter.post("/odjava", (req, res) => {
-  res.clearCookie("token");
-  console.log("Korisnik je odjavljen uspesno!");
-  res.status(200).json({ Poruka: "Korisnik je uspesno odjavljen." });
-});
+ruter.post("/odjava", instancaAutentikacionogKontrolera.OdjavaKorisnika);
 
 module.exports = ruter;

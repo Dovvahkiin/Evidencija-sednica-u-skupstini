@@ -9,10 +9,10 @@ const instanceAutentikacije = new OvlascenjeIAutentikacija();
 
 ruter
   .route("/sednica/:id/dnevnired")
-  /*   .all(
+  .all(
     instanceAutentikacije.Autentikacija,
     instanceAutentikacije.ProveraOvlascenja("admin")
-  ) */
+  )
   .post(instancaKontrolera.KreiranjeDnevnogReda)
   .put(instancaKontrolera.AzuriranjeDnevnogReda)
   .delete(instancaKontrolera.BrisanjeDnevnogReda);

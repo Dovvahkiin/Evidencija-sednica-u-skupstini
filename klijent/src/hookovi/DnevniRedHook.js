@@ -1,6 +1,5 @@
 import { useState } from "react";
 import DnevniRedServis from "../servisi/dnevniRedServis";
-import { VratiSednicuPoIDu } from "../hookovi/SednicaHook";
 
 const instanceDnevnogReda = new DnevniRedServis();
 

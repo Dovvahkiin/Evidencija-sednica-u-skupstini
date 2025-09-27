@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { PrijavaOdjavaHookvoi } from "../../../hookovi/AutentikacioniHook";
 
-const NavigacijaPrijavljenAdmin = () => {
+const NavigacijaPrijavljenAdmin = ({ odjava }) => {
   return (
     <nav className="navigacijaKontejner">
       <ul>
@@ -20,14 +21,16 @@ const NavigacijaPrijavljenAdmin = () => {
         </div>
         <div className="opcijeNavigacije">
           <li>
-            <Link to="/">ODJAVA</Link>
+            <Link to="/" onClick={odjava}>
+              ODJAVA
+            </Link>
           </li>
         </div>
       </ul>
     </nav>
   );
 };
-const NavigacijaPrijavljenKorisnik = () => {
+const NavigacijaPrijavljenKorisnik = ({ odjava }) => {
   return (
     <nav className="navigacijaKontejner">
       <ul>
@@ -43,7 +46,9 @@ const NavigacijaPrijavljenKorisnik = () => {
         </div>
         <div className="opcijeNavigacije">
           <li>
-            <Link to="/">ODJAVA</Link>
+            <Link to="/" onClick={odjava}>
+              ODJAVA
+            </Link>
           </li>
         </div>
       </ul>
@@ -66,7 +71,11 @@ const NavigacijaNijePrijavljen = () => {
 };
 
 function NavigacioniBar() {
-  return NavigacijaPrijavljenKorisnik();
+  const { OdjavaKorisnika } = PrijavaOdjavaHookvoi();
+  const OdjaviSe = async () => {
+    await OdjavaKorisnika();
+  };
+  return <NavigacijaPrijavljenAdmin odjava={OdjaviSe} />;
 }
 
 export default NavigacioniBar;
