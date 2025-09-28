@@ -35,9 +35,9 @@
 
 Make sure you have installed:
 
-> [NodeJS](https://nodejs.org/) (version 20+)
+[NodeJS](https://nodejs.org/) (version 20+)
 
-> [MySQL](https://dev.mysql.com/downloads/installer/) (version 8+)
+[MySQL](https://dev.mysql.com/downloads/installer/) (version 8+)
 
 ## Instalation
 
