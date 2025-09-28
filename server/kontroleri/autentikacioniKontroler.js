@@ -71,13 +71,19 @@ class AutentikacijaKontroler {
         return res
           .status(404)
           .json({ Uspeh: false, Greska: "Korisnik nije pronadjen!" });
-      const { ID, ImeKorisnika, EmailKorisnika, StatusKorisnika } =
-        podaciKorisnika[0];
+      const {
+        ID,
+        PrezimeKorisnika,
+        ImeKorisnika,
+        EmailKorisnika,
+        StatusKorisnika,
+      } = podaciKorisnika[0];
 
       res.status(200).json({
         Uspeh: true,
         korisnik: {
           id: ID,
+          prezime: PrezimeKorisnika,
           ime: ImeKorisnika,
           email: EmailKorisnika,
           status: StatusKorisnika,
