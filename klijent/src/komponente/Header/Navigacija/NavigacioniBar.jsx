@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PrijavaOdjavaHookvoi } from "../../../hookovi/AutentikacioniHook";
+import { PrijavaOdjavaHookvoi } from "../../../hookovi/PrijavaOdjavaHook";
+import { useAutentikacija } from "../../../skripte/AutentikacioniKontest";
 
 const NavigacijaPrijavljenAdmin = ({ odjava }) => {
   return (
@@ -71,11 +72,18 @@ const NavigacijaNijePrijavljen = () => {
 };
 
 function NavigacioniBar() {
-  const { OdjavaKorisnika } = PrijavaOdjavaHookvoi();
+  const { korisnik, OdjavaKorisnika } = useAutentikacija();
+
   const OdjaviSe = async () => {
     await OdjavaKorisnika();
   };
-  return <NavigacijaPrijavljenAdmin odjava={OdjaviSe} />;
+  return !korisnik ? (
+    <NavigacijaNijePrijavljen />
+  ) : korisnik.status === "admin" ? (
+    <NavigacijaPrijavljenAdmin odjava={OdjaviSe} />
+  ) : (
+    <NavigacijaPrijavljenKorisnik odjava={OdjaviSe} />
+  );
 }
 
 export default NavigacioniBar;

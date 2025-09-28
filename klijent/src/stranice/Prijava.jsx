@@ -1,17 +1,20 @@
 import { useState } from "react";
-import { PrijavaOdjavaHookvoi } from "../hookovi/AutentikacioniHook";
+import { PrijavaOdjavaHookvoi } from "../hookovi/PrijavaOdjavaHook";
 import { ValidacijaPrijave } from "../skripte/validacije/Validacije";
 import { useNavigate } from "react-router-dom";
+import { useAutentikacija } from "../skripte/AutentikacioniKontest";
 
 function Prijava() {
   const [vrednosti, PostaviVrednosti] = useState({
     email: "",
     lozinka: "",
   });
+
   const navigacija = useNavigate();
 
-  const { PrijavaKorisnika, greskaa } = PrijavaOdjavaHookvoi();
+  const { greskaa } = PrijavaOdjavaHookvoi();
 
+  const { PrijavaKorisnika, greskaAutentikacije } = useAutentikacija();
   function promenaTeksta(e) {
     PostaviVrednosti({ ...vrednosti, [e.target.name]: e.target.value });
   }
@@ -27,7 +30,7 @@ function Prijava() {
     try {
       odgovor = await PrijavaKorisnika(vrednosti.email, vrednosti.lozinka);
     } catch (greska) {
-      console.log(greskaa);
+      console.log(greskaAutentikacije);
 
       return greska;
     } finally {
@@ -41,7 +44,11 @@ function Prijava() {
     <main className="glavniFormat prijava">
       <form className="prijavaStranica" onSubmit={PrihvatanjeForme}>
         <h1>Prijava korisnika</h1>
-        {greskaa ? <span style={{ color: "red" }}>{greskaa}</span> : <></>}
+        {greskaAutentikacije ? (
+          <span style={{ color: "red" }}>{greskaAutentikacije}</span>
+        ) : (
+          <></>
+        )}
         <div className="unosPolje">
           <label htmlFor="email">Vaš email: </label>
           <input
@@ -55,7 +62,7 @@ function Prijava() {
         <div className="unosPolje">
           <label htmlFor="lozinka">Lozinka: </label>
           <input
-            type="lozinka"
+            type="password"
             name="lozinka"
             placeholder="Unesite vašu lozinku"
             onChange={promenaTeksta}

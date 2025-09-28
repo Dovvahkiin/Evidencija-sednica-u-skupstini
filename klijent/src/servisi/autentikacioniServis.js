@@ -13,5 +13,9 @@ class Autentikacija extends KoriscenjeAxiosa {
     const { data } = await this.api.get("/profil");
     return data;
   };
+  ProveriAuth = async () => {
+    const { data } = await this.api.get("/token");
+    return data;
+  };
 }
 export default Autentikacija;

@@ -5,12 +5,15 @@ import {
   OpcijeSednice,
 } from "../../hookovi/SednicaHook";
 import { useNavigate } from "react-router-dom";
+import { useAutentikacija } from "../../skripte/AutentikacioniKontest";
 
 function TabelaPregled({ PretragaPoIDu }) {
   const { sednice, ucitavanje, greska, PostaviSednice } = VratiSednice();
   const { sednicaPoIDu, ucitavanjePoIdu, greskaPoIdu } =
     VratiSednicuPoIDu(PretragaPoIDu);
   const { BrisanjeSednice } = OpcijeSednice();
+
+  const { korisnik } = useAutentikacija();
 
   const navigacija = useNavigate();
 
@@ -55,20 +58,28 @@ function TabelaPregled({ PretragaPoIDu }) {
                     <td>{sednica.Datum}</td>
                     <td>{sednica.BrojPrisutnih}</td>
                     <td>{sednica.StatusSednice}</td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          navigacija(`/sednica/${sednica.ID}/izmenisednicu`);
-                        }}
-                      >
-                        Izmeni
-                      </button>
-                    </td>
-                    <td>
-                      <button onClick={(e) => SrediKlik(e, sednica.ID)}>
-                        Obrisi
-                      </button>
-                    </td>
+                    {korisnik.status === "admin" ? (
+                      <>
+                        <td>
+                          <button
+                            onClick={() => {
+                              navigacija(
+                                `/sednica/${sednica.ID}/izmenisednicu`
+                              );
+                            }}
+                          >
+                            Izmeni
+                          </button>
+                        </td>
+                        <td>
+                          <button onClick={(e) => SrediKlik(e, sednica.ID)}>
+                            Obrisi
+                          </button>
+                        </td>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </tr>
                 ))
               ) : (
@@ -93,20 +104,26 @@ function TabelaPregled({ PretragaPoIDu }) {
                   <td>{sednica.Datum}</td>
                   <td>{sednica.BrojPrisutnih}</td>
                   <td>{sednica.StatusSednice}</td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        navigacija(`/sednica/${sednica.ID}/izmenisednicu`);
-                      }}
-                    >
-                      Izmeni
-                    </button>
-                  </td>
-                  <td>
-                    <button onClick={(e) => SrediKlik(e, sednica.ID)}>
-                      Obrisi
-                    </button>
-                  </td>
+                  {korisnik.status === "admin" ? (
+                    <>
+                      <td>
+                        <button
+                          onClick={() => {
+                            navigacija(`/sednica/${sednica.ID}/izmenisednicu`);
+                          }}
+                        >
+                          Izmeni
+                        </button>
+                      </td>
+                      <td>
+                        <button onClick={(e) => SrediKlik(e, sednica.ID)}>
+                          Obrisi
+                        </button>
+                      </td>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </tr>
               ))
             )}

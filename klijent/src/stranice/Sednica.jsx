@@ -3,12 +3,14 @@ import Header from "../komponente/Header/Header";
 import { VratiSednicuPoIDu } from "../hookovi/SednicaHook";
 import { useNavigate, useParams } from "react-router-dom";
 import { DnevniRedHook } from "../hookovi/DnevniRedHook";
+import { useAutentikacija } from "../skripte/AutentikacioniKontest";
 
 function Sednica() {
   const { id } = useParams();
   const { sednicaPoIDu, ucitavanjePoIDu } = VratiSednicuPoIDu(id);
   const { BrisanjeDnevnogReda } = DnevniRedHook();
   const navigacija = useNavigate();
+  const { korisnik } = useAutentikacija();
 
   console.log(sednicaPoIDu);
 
@@ -36,45 +38,49 @@ function Sednica() {
                   Tacke dnevnog reda:
                   {
                     // odavde admin
-                    sednica.DnevniRed === null ? (
-                      <button
-                        onClick={() => {
-                          navigacija(`/sednica/${sednica.ID}/dodajdnevnired`);
-                        }}
-                        style={{ marginLeft: "10px" }}
-                      >
-                        Dodaj Dnevni Red
-                      </button>
-                    ) : (
-                      <>
+                    korisnik.status === "admin" ? (
+                      sednica.DnevniRed === null ? (
                         <button
-                          style={{
-                            backgroundColor: "yellow",
-                            marginLeft: "10px",
-                            cursor: "pointer",
-                          }}
                           onClick={() => {
-                            navigacija(
-                              `/sednica/${sednica.ID}/izmenidnevnired`
-                            );
+                            navigacija(`/sednica/${sednica.ID}/dodajdnevnired`);
                           }}
+                          style={{ marginLeft: "10px" }}
                         >
-                          Izmeni Dnevni Red
+                          Dodaj Dnevni Red
                         </button>
-                        <button
-                          style={{
-                            color: "white",
-                            backgroundColor: "red",
-                            marginLeft: "10px",
-                            cursor: "pointer",
-                          }}
-                          onClick={(e) => {
-                            SrediKlik(e, id);
-                          }}
-                        >
-                          Obrisi dnevni red
-                        </button>
-                      </>
+                      ) : (
+                        <>
+                          <button
+                            style={{
+                              backgroundColor: "yellow",
+                              marginLeft: "10px",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => {
+                              navigacija(
+                                `/sednica/${sednica.ID}/izmenidnevnired`
+                              );
+                            }}
+                          >
+                            Izmeni Dnevni Red
+                          </button>
+                          <button
+                            style={{
+                              color: "white",
+                              backgroundColor: "red",
+                              marginLeft: "10px",
+                              cursor: "pointer",
+                            }}
+                            onClick={(e) => {
+                              SrediKlik(e, id);
+                            }}
+                          >
+                            Obrisi dnevni red
+                          </button>
+                        </>
+                      )
+                    ) : (
+                      <></>
                     )
                     /*do ovde admin */
                   }

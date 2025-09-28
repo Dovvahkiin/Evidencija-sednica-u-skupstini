@@ -62,6 +62,32 @@ class AutentikacijaKontroler {
     res.clearCookie("token");
     return res.status(200).json({ Poruka: "Uspesno ste se odjavili!" });
   };
+
+  ProveriKorisnika = async (req, res) => {
+    try {
+      const korisnikID = req.user.id;
+      const podaciKorisnika = await instancaKorisnika.vratiPoIDu(korisnikID);
+      if (!podaciKorisnika || podaciKorisnika.length === 0)
+        return res
+          .status(404)
+          .json({ Uspeh: false, Greska: "Korisnik nije pronadjen!" });
+      const { ID, ImeKorisnika, EmailKorisnika, StatusKorisnika } =
+        podaciKorisnika[0];
+
+      res.status(200).json({
+        Uspeh: true,
+        korisnik: {
+          id: ID,
+          ime: ImeKorisnika,
+          email: EmailKorisnika,
+          status: StatusKorisnika,
+          // Možeš dodati više: role, datum kreiranja, itd.
+        },
+      });
+    } catch (greska) {
+      return res.status(500).json({ Greska: "Greska na server!" });
+    }
+  };
 }
 
 module.exports = { AutentikacijaKontroler };

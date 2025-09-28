@@ -4,6 +4,7 @@ import Header from "../komponente/Header/Header";
 import Footer from "../komponente/Footer";
 import Pretraga from "../komponente/Pretraga";
 import { VratiSednice } from "../hookovi/SednicaHook";
+import { useAutentikacija } from "../skripte/AutentikacioniKontest";
 
 const PocetnaPrijavljen = () => {
   const [pretragaID, postaviPretragaID] = useState("");
@@ -38,7 +39,19 @@ const PocetnaNijePrijavljen = () => {
 };
 
 function Pocetna() {
-  return PocetnaPrijavljen();
+  const { korisnik, ucitavanje } = useAutentikacija();
+
+  if (ucitavanje) {
+    return (
+      <main>
+        <Header />
+        <section className="okvirSajta">
+          <p>Učitavanje...</p>
+        </section>
+      </main>
+    );
+  }
+  return !korisnik ? <PocetnaNijePrijavljen /> : <PocetnaPrijavljen />;
 }
 
 export default Pocetna;

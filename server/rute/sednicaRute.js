@@ -10,8 +10,8 @@ const instanceAutentikacije = new OvlascenjeIAutentikacija();
 ruter
   .route("/sednice")
   .post(
-    /*     instanceAutentikacije.Autentikacija,
-    instanceAutentikacije.ProveraOvlascenja("admin"), */
+    instanceAutentikacije.Autentikacija,
+    instanceAutentikacije.ProveraOvlascenja("admin"),
     instancaKontrolera.KreirajSednicu
   )
   .get(instancaKontrolera.PregledSvihSednica);
@@ -20,13 +20,13 @@ ruter
   .route("/sednica/:id")
   .get(instancaKontrolera.PregledOdredjeneSednice)
   .delete(
-    /*     instanceAutentikacije.Autentikacija,
-    instanceAutentikacije.ProveraOvlascenja("admin"), */
+    instanceAutentikacije.Autentikacija,
+    instanceAutentikacije.ProveraOvlascenja("admin"),
     instancaKontrolera.BrisanjeSednice
   )
   .put(
-    /*     instanceAutentikacije.Autentikacija,
-    instanceAutentikacije.ProveraOvlascenja("admin"), */
+    instanceAutentikacije.Autentikacija,
+    instanceAutentikacije.ProveraOvlascenja("admin"),
     instancaKontrolera.IzmenaSednice
   );
 

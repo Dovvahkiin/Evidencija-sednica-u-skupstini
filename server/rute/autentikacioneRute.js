@@ -16,4 +16,10 @@ ruter.post(
 
 ruter.post("/odjava", instancaAutentikacionogKontrolera.OdjavaKorisnika);
 
+ruter.get(
+  "/token",
+  instanceAutentikacije.Autentikacija,
+  instancaAutentikacionogKontrolera.ProveriKorisnika
+);
+
 module.exports = ruter;

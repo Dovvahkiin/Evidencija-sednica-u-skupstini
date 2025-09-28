@@ -11,6 +11,8 @@ import KreirajSednicu from "../stranice/adminSednica/KreirajSednicu";
 import IzmeniSednicu from "../stranice/adminSednica/IzmeniSednicu";
 import DodajDnevniRed from "../stranice/adminSednica/DodajDnevniRed";
 import IzmeniDnevniRed from "../stranice/adminSednica/IzmeniDnevniRed";
+import ZasticeneRute from "../skripte/ZasticeneRute";
+import AdminZasticeneRute from "../skripte/AdminRute";
 
 //funkcija routera
 
@@ -25,28 +27,38 @@ const ruter = createBrowserRouter([
     element: <Prijava />,
   },
   {
-    path: "/profil",
-    element: <Profil />,
+    element: <ZasticeneRute />,
+    children: [
+      {
+        path: "/profil",
+        element: <Profil />,
+      },
+      {
+        path: "/sednica/:id",
+        element: <Sednica />,
+      },
+    ],
   },
   {
-    path: "/sednica/:id",
-    element: <Sednica />,
-  },
-  {
-    path: "/kreirajsednicu",
-    element: <KreirajSednicu />,
-  },
-  {
-    path: "/sednica/:id/izmenisednicu",
-    element: <IzmeniSednicu />,
-  },
-  {
-    path: "/sednica/:id/dodajdnevnired",
-    element: <DodajDnevniRed />,
-  },
-  {
-    path: "/sednica/:id/izmenidnevnired",
-    element: <IzmeniDnevniRed />,
+    element: <AdminZasticeneRute />,
+    children: [
+      {
+        path: "/kreirajsednicu",
+        element: <KreirajSednicu />,
+      },
+      {
+        path: "/sednica/:id/izmenisednicu",
+        element: <IzmeniSednicu />,
+      },
+      {
+        path: "/sednica/:id/dodajdnevnired",
+        element: <DodajDnevniRed />,
+      },
+      {
+        path: "/sednica/:id/izmenidnevnired",
+        element: <IzmeniDnevniRed />,
+      },
+    ],
   },
 ]);
 
