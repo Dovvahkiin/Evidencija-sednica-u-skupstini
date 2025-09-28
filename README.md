@@ -74,13 +74,14 @@ cd server
 - Environment variables for client: ( _*change with actual values*_ )
 
 ```plaintext
-VITE_NODE_PORT = yourNodePort
+VITE_NODE_PORT = yourServerPort
 ```
 
 - Environment variables for server: ( _*change with actual values*_ )
 
 ```plaintext
-KLIJENT_PORT = 5173
+KLIJENT_PORT = yourClientPort
+NODE_PORT = yourServerPort
 
 DB_HOST = yourDatabaseHost
 DB_KORISNIK = yourDatabaseUsername
