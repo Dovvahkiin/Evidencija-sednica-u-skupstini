@@ -59,7 +59,7 @@ function IzmeniDnevniRed() {
               ></textarea>
             </div>
             <div className="unosPolje sednica">
-              <button type="submit">Dodaj Dnevni Red</button>
+              <button type="submit">Izmeni Dnevni Red</button>
             </div>
           </div>
         </form>
