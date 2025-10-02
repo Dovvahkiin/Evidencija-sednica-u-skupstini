@@ -13,6 +13,7 @@ import DodajDnevniRed from "../stranice/adminSednica/DodajDnevniRed";
 import IzmeniDnevniRed from "../stranice/adminSednica/IzmeniDnevniRed";
 import ZasticeneRute from "../skripte/ZasticeneRute";
 import AdminZasticeneRute from "../skripte/AdminRute";
+import StampaStranica from "../stranice/StampaStranica";
 
 //funkcija routera
 
@@ -36,6 +37,10 @@ const ruter = createBrowserRouter([
       {
         path: "/sednica/:id",
         element: <Sednica />,
+      },
+      {
+        path: "/stampa/:id",
+        element: <StampaStranica />,
       },
     ],
   },

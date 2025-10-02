@@ -29,6 +29,7 @@ function AutentikacioniProvajder({ children }) {
     };
     ProveriAutentikaciju();
   }, []);
+
   const PrijavaKorisnika = async (email, lozinka) => {
     try {
       PostaviUcitavanje(true);

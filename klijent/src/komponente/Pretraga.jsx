@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Pretraga({ elementPretrage }) {
-  const [pretraga, koristiPretragu] = useState("");
+  const [pretraga, koristiPretragu] = useState(null);
   const pretragaKucanje = (e) => {
     koristiPretragu(e.target.value);
   };
@@ -13,15 +13,15 @@ function Pretraga({ elementPretrage }) {
 
   return (
     <div className="pretragaKontejner">
-      <form onSubmit={PretragaKlik}>
+      <form>
         <span>Pretraga po ID-u: </span>
         <input
-          type="text"
+          type="number"
           name="pretraga"
           value={pretraga}
           onChange={pretragaKucanje}
         />
-        <button>Pretraži</button>
+        <button onClick={PretragaKlik}>Pretraži</button>
       </form>
     </div>
   );

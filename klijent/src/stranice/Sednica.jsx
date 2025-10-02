@@ -12,7 +12,8 @@ function Sednica() {
   const navigacija = useNavigate();
   const { korisnik } = useAutentikacija();
 
-  console.log(sednicaPoIDu);
+  const noviID = id;
+  console.log(noviID);
 
   if (ucitavanjePoIDu) return <p>Ucitavanje...</p>;
 
@@ -25,10 +26,16 @@ function Sednica() {
     window.location.reload();
   };
 
+  const srediKlikStampe = async (e) => {
+    e.preventDefault();
+    navigacija(`/stampa/${noviID}`);
+  };
+
   return (
     <main>
       <Header />
       <section className="okvirSajta sednica">
+        <button onClick={srediKlikStampe}>Štampaj</button>
         {detaljiSednice ? (
           detaljiSednice.map((sednica, indeks) => (
             <div key={sednica.ID ?? indeks}>

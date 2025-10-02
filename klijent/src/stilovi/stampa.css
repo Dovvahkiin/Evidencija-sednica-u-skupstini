@@ -1,0 +1,40 @@
+.stampa {
+  background-color: white;
+  color: black;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 10%;
+}
+.sadrzajStampe {
+  padding-top: 5em;
+  margin-bottom: 10em;
+  max-width: 50%;
+}
+
+.stampa > h2,
+.stampa > h1 {
+  text-align: center;
+}
+
+.vrednostiStampe {
+  font-size: 1rem;
+  color: red;
+}
+
+.vrednostiStampe.red {
+  margin-left: 10px;
+}
+
+.vremeStampe {
+  display: flex;
+  flex-direction: column;
+}
+
+.zaglavljeStampe {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 5%;
+}
