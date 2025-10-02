@@ -24,7 +24,9 @@ class SednicaKontroler {
           Akcija: false,
           Poruka: "Ne postoji ni jedna zabelezena sednica!",
         });
-      } else return res.status(200).json({ Akcija: true, pregledajSveSednice });
+      } else {
+        return res.status(200).json({ Akcija: true, pregledajSveSednice });
+      }
     } catch (greska) {
       console.error(greska);
       return res.status(404).json({ Akcija: false, greska });
