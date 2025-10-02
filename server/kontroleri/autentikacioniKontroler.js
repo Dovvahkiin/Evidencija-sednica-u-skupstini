@@ -46,7 +46,7 @@ class AutentikacijaKontroler {
       res.cookie("token", token, {
         httpOnly: true,
         secure: false,
-        maxAge: 15 * 60 * 1000, // 15 minuta
+        maxAge: 120 * 60 * 1000, // 120 minuta
       });
 
       console.log(
