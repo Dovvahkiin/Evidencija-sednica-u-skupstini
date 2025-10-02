@@ -123,12 +123,7 @@ function TabelaPregled({ PretragaPoIDu }) {
                     </>
                   ) : (
                     <tr>
-                      <td
-                        style={{ color: "violet", textAlign: "center" }}
-                        colSpan={6}
-                      >
-                        Sednica koju pokusavate da pronadjete ne postoji.
-                      </td>
+                      <></>
                     </tr>
                   )}
                 </tr>
