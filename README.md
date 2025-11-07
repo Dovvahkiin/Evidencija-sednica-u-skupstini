@@ -106,5 +106,5 @@ TAJNA_SESIJE = yourSessionSecretForTokens
   - Password: `admin123`
 
 - For testing as regular user, in login, type following credentials:
-  - Email: `pera@gmail.com`
+  - Email: `peraperic@gmail.com`
   - Password: `pera123`
