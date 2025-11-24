@@ -12,7 +12,7 @@
 
 **A CRUD APLICATION FOR RECORDING MEETINGS IN PARLAMENT**
 
-_**NOTE : Everything is written in Serbian language because of pre-exam requirements**_
+_**NOTE : Everything is written in Serbian language because of the pre-exam requirements**_
 
 ## FEATURES
 
