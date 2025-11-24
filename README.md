@@ -12,6 +12,8 @@
 
 **A CRUD APLICATION FOR RECORDING MEETINGS IN PARLAMENT**
 
+_**NOTE : Everything is written in Serbian language because of pre-exam requirements**_
+
 ## FEATURES
 
 </div>
