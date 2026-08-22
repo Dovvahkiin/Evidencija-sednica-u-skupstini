@@ -1,4 +1,4 @@
-import dbData from "../config/dbConfig.js";
+import { dbData } from "../config/dbConfig.js";
 
 class DBModel {
   constructor(tableName) {

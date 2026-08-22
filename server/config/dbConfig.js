@@ -1,6 +1,16 @@
 import dotenv from "dotenv";
 import mysql from "mysql2/promise";
+import chalk from "chalk";
 dotenv.config();
+
+const DBTest = async () => {
+  try {
+    const [result] = await dbData.query("SELECT 1");
+    console.log(chalk.green("MySQL connected: \n", result));
+  } catch (error) {
+    console.error(chalk.red("MySQL connection failed: \n"), error);
+  }
+};
 
 const dbData = mysql.createPool({
   host: process.env.DB_HOST,
@@ -14,4 +24,4 @@ const dbData = mysql.createPool({
   queueLimit: 0,
 });
 
-export default dbData;
+export { DBTest, dbData };
