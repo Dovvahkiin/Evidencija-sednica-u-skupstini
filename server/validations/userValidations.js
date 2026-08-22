@@ -1,6 +1,6 @@
+import { emailRegex } from "../utils/constants";
 const loginValidation = async (data = []) => {
   const { email, password } = data;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const errors = [];
 
   if (!email || email.trim() === "") errors.push("Email cannot be empty!\n");
