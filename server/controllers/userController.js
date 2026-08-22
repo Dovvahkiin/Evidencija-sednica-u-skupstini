@@ -1,4 +1,5 @@
 import UserServices from "../services/userServices";
+import { genericCatchBlock } from "../utils/constants";
 
 class UserController {
   getProfile = async (req, res) => {
@@ -10,9 +11,7 @@ class UserController {
         return res.status(404).json({ message: "User does not exists." });
       return res.status(200).json({ profile: profile });
     } catch (error) {
-      return res
-        .status(500)
-        .json({ message: "INTERNAL SERVER ERROR!", error: error });
+      return genericCatchBlock(res, error);
     }
   };
 }

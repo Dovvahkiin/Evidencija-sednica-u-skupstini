@@ -1,6 +1,7 @@
 import MeetingValidators from "../validations/meetingValidations";
 import MeetingServices from "../services/meetingServices";
 import chalk from "chalk";
+import { genericCatchBlock } from "../utils/constants";
 
 class MeetingController {
   async getAllMeetings(req, res) {
@@ -13,9 +14,7 @@ class MeetingController {
 
       return res.status(200).json({ result });
     } catch (error) {
-      return res
-        .status(500)
-        .json({ Message: "INTERNAL SERVER ERROR", error: error });
+      return genericCatchBlock(res, error);
     }
   }
 
@@ -31,9 +30,7 @@ class MeetingController {
 
       return res.status(200).json({ result });
     } catch (error) {
-      return res
-        .status(500)
-        .json({ Message: "INTERNAL SERVER ERROR", error: error });
+      return genericCatchBlock(res, error);
     }
   }
 
@@ -62,9 +59,7 @@ class MeetingController {
       console.log(chalk.green("Successfully created meeting."));
       return res.status(201).json({ success: true, newMeeting });
     } catch (error) {
-      return res
-        .status(500)
-        .json({ Message: "INTERNAL SERVER ERROR", error: error });
+      return genericCatchBlock(res, error);
     }
   }
 
@@ -83,9 +78,7 @@ class MeetingController {
           .status(404)
           .json({ success: false, message: "Meeting does not exists." });
     } catch (error) {
-      return res
-        .status(500)
-        .json({ Message: "INTERNAL SERVER ERROR", error: error });
+      return genericCatchBlock(res, error);
     }
   };
 
@@ -116,9 +109,7 @@ class MeetingController {
       console.log(chalk.green("Successfully updated meeting."));
       return res.status(201).json({ success: true, updateMeeting });
     } catch (error) {
-      return res
-        .status(500)
-        .json({ Message: "INTERNAL SERVER ERROR", error: error });
+      return genericCatchBlock(res, error);
     }
   }
 }
