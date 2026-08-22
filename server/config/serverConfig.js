@@ -1,13 +1,21 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-export const nodePort = process.env.NODE_PORT;
-export const clientPort = process.env.KLIJENT_PORT;
+export const NODE_PORT = process.env.NODE_PORT || 3000;
+export const CLIENT_PORT = process.env.CLIENT_PORT || 5173;
+export const ENV = process.env.NODE_ENV || "development";
+export const FRONTEND_URL = process.env.FRONTEND_URL;
+
+const productionOrigin = FRONTEND_URL;
 
 export const serverConfig = {
   corsOptions: {
-    origin: [`http://localhost:${clientPort}`],
-    method: ["GET", "POST", "PUT", "DELETE"],
+    origin:
+      ENV === "production"
+        ? [productionOrigin]
+        : [`http://localhost:${CLIENT_PORT}`],
+    methods: "POST,GET,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
     credentials: true,
   },
 };
