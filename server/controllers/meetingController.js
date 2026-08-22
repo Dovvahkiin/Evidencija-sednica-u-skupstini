@@ -46,7 +46,7 @@ class MeetingController {
         return res.status(400).json({ errors: validationResult.errors });
       }
 
-      const [meetingTitle, date, attendees, meetingStatusId, content] = data;
+      const { meetingTitle, date, attendees, meetingStatusId, content } = data;
       let newMeetingStatusId = meetingStatusId;
 
       const newMeeting = await MeetingServices.createMeeting(
@@ -94,7 +94,7 @@ class MeetingController {
         return res.status(400).json({ Errors: validationResult.errors });
       }
 
-      const [meetingTitle, date, attendees, meetingStatusId, content] = data;
+      const { meetingTitle, date, attendees, meetingStatusId, content } = data;
 
       const ID = parseInt(req.params.id, 10);
       const updateMeeting = await MeetingServices.editMeeting(

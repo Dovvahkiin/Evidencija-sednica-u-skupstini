@@ -2,8 +2,8 @@ import MembersClass from "../utils/quota";
 const totalNumberOfMembers = await MembersClass.loadNumberOfMembers();
 
 class Validators {
-  meetingInputValidation = async (data = []) => {
-    const [meetingTitle, date, attendees, meetingStatusId] = data;
+  meetingInputValidation = async (data = {}) => {
+    const { meetingTitle, date, attendees, meetingStatusId } = data;
     const errors = [];
 
     if (
@@ -35,8 +35,8 @@ class Validators {
     return errors;
   };
 
-  meetingEditingValidation = async (data = []) => {
-    const [meetingTitle, date, attendees, meetingStatusId] = data;
+  meetingEditingValidation = async (data = {}) => {
+    const { meetingTitle, date, attendees, meetingStatusId } = data;
     const errors = [];
 
     if (meetingTitle)
@@ -60,7 +60,7 @@ class Validators {
     return errors;
   };
 
-  meetingAgendaValidation = async (input) => {
+  meetingAgendaValidation = async (input = {}) => {
     const errors = [];
 
     if (input.trim() === "") errors.push("Agenda content cannot be empty\n");
