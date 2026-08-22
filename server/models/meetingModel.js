@@ -42,7 +42,7 @@ class MeetingModel extends DBModel {
   }
 }
 
-// for SQL VIEWS use code below
+// for SQL VIEWS use code below (if it uses default functions from DBModel)
 // const foo = new DBModel("viewName");
 
 export default MeetingModel;
