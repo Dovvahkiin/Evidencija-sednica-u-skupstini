@@ -6,13 +6,11 @@ export const CLIENT_PORT = process.env.CLIENT_PORT || 5173;
 export const ENV = process.env.NODE_ENV || "development";
 export const FRONTEND_URL = process.env.FRONTEND_URL;
 
-const productionOrigin = FRONTEND_URL;
-
 export const serverConfig = {
   corsOptions: {
     origin:
       ENV === "production"
-        ? [productionOrigin]
+        ? [FRONTEND_URL]
         : [`http://localhost:${CLIENT_PORT}`],
     methods: "POST,GET,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization",
