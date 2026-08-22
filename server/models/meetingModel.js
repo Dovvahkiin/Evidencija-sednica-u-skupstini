@@ -31,7 +31,7 @@ class MeetingModel extends DBModel {
     content,
   ) {
     const upit = "CALL azurirajSednicu (?,?,?,?,?,?)";
-    return await this.izvrsiUpit(upit, [
+    return await this.doExecuteQuery(upit, [
       meetingId,
       meetingTitle || null,
       date || null,
