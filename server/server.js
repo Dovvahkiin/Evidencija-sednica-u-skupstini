@@ -1,13 +1,10 @@
-require("dotenv").config("./.env");
+import dotenv from "dotenv";
 import chalk from "chalk";
+dotenv.config();
 
-const app = require("./app.js");
-const serverKonfiguracija = require("./konfiguracije/serverKonfiguracija");
+import { NODE_PORT } from "./config/serverConfig.js";
+import app from "./app.js";
 
-app.listen(serverKonfiguracija.nodePort, () =>
-  console.log(
-    chalk.blue(
-      `Example app listening on port ${serverKonfiguracija.nodePort}!`,
-    ),
-  ),
+app.listen(NODE_PORT, () =>
+  console.log(chalk.blue(`\nServer is started on port: ${NODE_PORT}!\n`)),
 );

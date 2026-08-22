@@ -1,25 +1,35 @@
-const express = require("express");
-const cors = require("cors");
-const jwt = require("jsonwebtoken");
-const app = express();
-const chalk = require("chalk");
-const cookieParser = require("cookie-parser");
+import express from "express";
+import cors from "cors";
+import jwt from "jsonwebtoken";
+import chalk from "chalk";
+import helmet from "helmet";
+import cookieParser from "cookie-parser";
+import { serverConfig } from "./config/serverConfig.js";
+import dotenv from "dotenv";
+dotenv.config();
 
-const serverKonfiguracija = require("./konfiguracije/serverKonfiguracija");
-app.use(express.json());
-
+/*
 const sednicaRuter = require("./rute/sednicaRute.js");
 const dnevniRedRuter = require("./rute/dnevniRedRute.js");
 const korisnikRuter = require("./rute/korisnikRute.js");
 const autentikacijaRuter = require("./rute/autentikacioneRute.js");
+*/
 
-app.use(cors(serverKonfiguracija.corsOptions));
-app.use(express.urlencoded({ extended: true }));
+const app = express();
+
+app.use(helmet());
+
+app.use(cors(serverConfig.corsOptions));
+
+app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 
+/*
 app.use("/", sednicaRuter);
 app.use("/", korisnikRuter);
 app.use("/", dnevniRedRuter);
 app.use("/", autentikacijaRuter);
+*/
 
-module.exports = app;
+export default app;
