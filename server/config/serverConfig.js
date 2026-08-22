@@ -6,6 +6,9 @@ export const CLIENT_PORT = process.env.CLIENT_PORT || 5173;
 export const ENV = process.env.NODE_ENV || "development";
 export const FRONTEND_URL = process.env.FRONTEND_URL;
 
+export const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
+export const ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
+
 export const serverConfig = {
   corsOptions: {
     origin:
