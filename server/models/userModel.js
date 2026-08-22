@@ -8,7 +8,7 @@ class UserModel extends DBModel {
   userLogin = async (email, password) => {
     const query =
       "SELECT * FROM pregledProfilaKorisnika where EmailKorisnika = ? and LozinkaKorisnika = ? LIMIT 1";
-    return await this.izvrsiUpit(query, [email, password]);
+    return await this.doExecuteQuery(query, [email, password]);
   };
 }
 
