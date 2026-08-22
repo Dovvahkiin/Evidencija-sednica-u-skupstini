@@ -63,7 +63,7 @@ class Validators {
   meetingAgendaValidation = async (input) => {
     const errors = [];
 
-    if (!input) errors.push("Agenda content cannot be empty\n");
+    if (input.trim() === "") errors.push("Agenda content cannot be empty\n");
     return errors;
   };
 }
