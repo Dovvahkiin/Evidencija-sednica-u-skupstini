@@ -15,8 +15,8 @@ class AgendaModel extends DBModel {
   }
 
   async deleteAgenda(IDAgenda) {
-    const upit = "CALL obrisiDnevniRed (?)";
-    return await this.doExecuteQuery(upit, [IDAgenda]);
+    const query = "CALL obrisiDnevniRed (?)";
+    return await this.doExecuteQuery(query, [IDAgenda]);
   }
 }
 

@@ -6,8 +6,8 @@ class MeetingModel extends DBModel {
   }
 
   async addNewMeeting(meetingTitle, date, attendees, meetingStatusId, content) {
-    const upit = "CALL dodajNovuSednicu (?,?,?,?,?)";
-    return await this.doExecuteQuery(upit, [
+    const query = "CALL dodajNovuSednicu (?,?,?,?,?)";
+    return await this.doExecuteQuery(query, [
       meetingTitle,
       date,
       attendees,
@@ -30,8 +30,8 @@ class MeetingModel extends DBModel {
     meetingStatusId,
     content,
   ) {
-    const upit = "CALL azurirajSednicu (?,?,?,?,?,?)";
-    return await this.doExecuteQuery(upit, [
+    const query = "CALL azurirajSednicu (?,?,?,?,?,?)";
+    return await this.doExecuteQuery(query, [
       meetingId,
       meetingTitle || null,
       date || null,
