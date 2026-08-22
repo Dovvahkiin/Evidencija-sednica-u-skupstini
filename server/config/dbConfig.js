@@ -3,9 +3,9 @@ import mysql from "mysql2/promise";
 import chalk from "chalk";
 dotenv.config();
 
-const DBTest = async () => {
+const DBTest = () => {
   try {
-    const [result] = await dbData.query("SELECT 1");
+    const [result] = dbData.query("SELECT 1");
     console.log(chalk.green("MySQL connected: \n", result));
   } catch (error) {
     console.error(chalk.red("MySQL connection failed: \n"), error);
