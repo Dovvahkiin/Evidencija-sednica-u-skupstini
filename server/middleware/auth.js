@@ -1,6 +1,6 @@
 import JwtService from "../services/jwtService";
 
-class Authentication {
+class AuthMiddleware {
   static Authentication = (req, res, next) => {
     const token = req.cookies.token;
     if (!token)
@@ -44,4 +44,4 @@ class Authentication {
   };
 }
 
-export default Authentication;
+export default AuthMiddleware;
