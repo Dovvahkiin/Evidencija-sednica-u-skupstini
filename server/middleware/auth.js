@@ -1,7 +1,7 @@
 import JwtService from "../services/jwtService";
 
 class Authentication {
-  Authentication = (req, res, next) => {
+  static Authentication = (req, res, next) => {
     const token = req.cookies.token;
     if (!token)
       return res.status(401).json({ success: false, message: "Unauthorized!" });
@@ -17,7 +17,7 @@ class Authentication {
     }
   };
 
-  LoginCheck = (req, res, next) => {
+  static LoginCheck = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) return next();
     try {
@@ -32,7 +32,7 @@ class Authentication {
     }
   };
 
-  Authorization = (...allowedRoles) => {
+  static Authorization = (...allowedRoles) => {
     return (req, res, next) => {
       if (!req.user)
         // if user does not exists access if unauthorized
