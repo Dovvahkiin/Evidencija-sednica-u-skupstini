@@ -51,7 +51,7 @@ insert into meetingRecords.userRoles (UserRoleName) values ('admin'),('user');
 insert into meetingRecords.meetingStatusID (MeetingStatusName) values ('scheduled'),('finished'), ('delayed'),('canceled');
 
 insert into meetingRecords.users (firstName,lastName,userEmail, userPassword, userRoleID)
-values ("admin","adminovic","admin@admin.com","admin123", 1), ("Pera","Peric","pera@gmail.com","pera123","2");
+values ("admin","admin","admin@admin.com","admin123", 1), ("John","doe","john123@gmail.com","johndoe1","2");
 
 -- creating views
 
