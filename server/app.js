@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import jwt from "jsonwebtoken";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { serverConfig } from "./config/serverConfig.js";
