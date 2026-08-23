@@ -12,7 +12,6 @@
 
 **A CRUD APLICATION FOR RECORDING MEETINGS IN PARLAMENT**
 
-
 ## FEATURES
 
 </div>
@@ -74,6 +73,8 @@ cd server
 - Create a `.env` file in the server and client directories
 - Environment variables for client: ( _*change with actual values*_ )
 
+_to be changed_
+
 ```plaintext
 VITE_NODE_PORT = yourServerPort
 ```
@@ -81,19 +82,21 @@ VITE_NODE_PORT = yourServerPort
 - Environment variables for server: ( _*change with actual values*_ )
 
 ```plaintext
-KLIJENT_PORT = yourClientPort
-NODE_PORT = yourServerPort
+DB_DATABASE=
+DB_HOST=
+DB_USER=
+DB_PASSWORD=
+DB_PORT=
 
-DB_HOST = yourDatabaseHost
-DB_KORISNIK = yourDatabaseUsername
-DB_LOZINKA = yourDatabasePassword
-DB_BAZA = yourDatabaseName
-DB_PORT = yourDatabasePort
+NODE_PORT =
+CLIENT_PORT =
+ENV = "development"
 
-TAJNA_SESIJE = yourSessionSecretForTokens
+ACCESS_SECRET =
+REFRESH_SECRET =
 ```
 
-7. Import every `SQL` script into your database from `Baza podataka` folder using SQL SHELL.
+7. Import every `SQL` script into your database from `DataBase(SQL)` folder using SQL SHELL.
 
 <div align="center">
 
@@ -102,10 +105,9 @@ TAJNA_SESIJE = yourSessionSecretForTokens
 </div>
 
 - For testing as admin in login type following credentials:
-
   - Email: `admin@admin.com`
   - Password: `admin123`
 
 - For testing as regular user, in login, type following credentials:
-  - Email: `peraperic@gmail.com`
-  - Password: `pera123`
+  - Email: `john123@gmail.com`
+  - Password: `johndoe1`
