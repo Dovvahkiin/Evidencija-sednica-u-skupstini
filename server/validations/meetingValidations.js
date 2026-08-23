@@ -69,7 +69,7 @@ class Validators {
 }
 
 class MeetingValidators extends Validators {
-  dataValidation = async (type, data) => {
+  static dataValidation = async (type, data) => {
     switch (type) {
       case "create":
         return this.meetingInputValidation(data);

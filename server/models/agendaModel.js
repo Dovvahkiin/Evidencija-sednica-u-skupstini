@@ -4,17 +4,17 @@ class AgendaModel extends DBModel {
   constructor() {
     super("dnevni_red");
   }
-  async addNewAgenda(text, IDMeeting) {
+  static async addNewAgenda(text, IDMeeting) {
     const query = "CALL dodajDnevniRed (?,?)";
     return await this.doExecuteQuery(query, [text, IDMeeting]);
   }
 
-  async updateAgenda(text, IDMeeting) {
+  static async updateAgenda(text, IDMeeting) {
     const query = "CALL azurirajDnevniRed (?,?)";
     return await this.doExecuteQuery(query, [IDMeeting, text]);
   }
 
-  async deleteAgenda(IDAgenda) {
+  static async deleteAgenda(IDAgenda) {
     const query = "CALL obrisiDnevniRed (?)";
     return await this.doExecuteQuery(query, [IDAgenda]);
   }

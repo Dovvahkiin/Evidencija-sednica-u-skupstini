@@ -9,11 +9,11 @@ const quota = async () => {
 };
 
 class MembersClass {
-  loadNumberOfMembers = async () => {
+  static loadNumberOfMembers = async () => {
     const result = JSON.parse(fs.readFileSync(membersInput, "utf8"));
     return result.numberOfMembers;
   };
-  membersCheck = async (data) => {
+  static membersCheck = async (data) => {
     const isThereEnoughMembers = await quota();
     if (data >= isThereEnoughMembers) return true;
     else return false;

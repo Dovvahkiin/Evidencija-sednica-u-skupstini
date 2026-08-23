@@ -1,7 +1,7 @@
 import { emailRegex } from "../utils/constants";
 
 class UserValidations {
-  loginValidation = async (data = {}) => {
+  static loginValidation = async (data = {}) => {
     const { email, password } = data;
     const errors = [];
 

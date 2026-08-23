@@ -5,7 +5,13 @@ class MeetingModel extends DBModel {
     super("sednica");
   }
 
-  async addNewMeeting(meetingTitle, date, attendees, meetingStatusId, content) {
+  static async addNewMeeting(
+    meetingTitle,
+    date,
+    attendees,
+    meetingStatusId,
+    content,
+  ) {
     const query = "CALL dodajNovuSednicu (?,?,?,?,?)";
     return await this.doExecuteQuery(query, [
       meetingTitle,
@@ -16,13 +22,13 @@ class MeetingModel extends DBModel {
     ]);
   }
 
-  async deleteMeeting(id) {
+  static async deleteMeeting(id) {
     const query = "CALL obrisiSednicu(?)";
     const result = await this.doExecuteQuery(query, [id]);
     return result[0]?.[0]?.deleted ?? 0;
   }
 
-  async editMeeting(
+  static async editMeeting(
     meetingId,
     meetingTitle,
     date,
