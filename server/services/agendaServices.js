@@ -1,15 +1,15 @@
 import AgendaModel from "../models/agendaModel";
 
 class AgendaServices {
-  createAgenda = async (agendaContent, meetingID) => {
-    return await AgendaModel.createAgenda(agendaContent, meetingID);
+  static createAgenda = async (agendaContent, meetingID) => {
+    return await AgendaModel.addNewAgenda(agendaContent, meetingID);
   };
 
-  updateAgenda = async (agendaContent, meetingID) => {
+  static updateAgenda = async (agendaContent, meetingID) => {
     return await AgendaModel.updateAgenda(agendaContent, meetingID);
   };
 
-  deleteAgenda = async (agendaID) => {
+  static deleteAgenda = async (agendaID) => {
     return await AgendaModel.deleteAgenda(agendaID);
   };
 }

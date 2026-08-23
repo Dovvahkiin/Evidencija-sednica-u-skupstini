@@ -4,7 +4,7 @@ import MembersClass from "../utils/quota";
 import chalk from "chalk";
 
 class MeetingServices {
-  getAllMeetings = async () => {
+  static getAllMeetings = async () => {
     const getMeetings = new DBModel("detaljanpregledsednice");
     const meetings = await getMeetings.getAll();
 
@@ -17,7 +17,7 @@ class MeetingServices {
     return meetings;
   };
 
-  getMeetingById = async (id) => {
+  static getMeetingById = async (id) => {
     const getMeeting = new DBModel("detaljanpregledsednice");
     const meeting = await getMeeting.getById(id);
 
@@ -30,7 +30,7 @@ class MeetingServices {
     return meeting;
   };
 
-  createMeeting = async (data) => {
+  static createMeeting = async (data) => {
     const [meetingTitle, date, attendees, meetingStatusId, content] = data;
     let newStatus = meetingStatusId;
     const currentMembersNumber = await MembersClass.membersCheck(attendees);
@@ -45,14 +45,14 @@ class MeetingServices {
     );
   };
 
-  deleteMeeting = async (id) => {
+  static deleteMeeting = async (id) => {
     const deleteResult = await MeetingModel.deleteMeeting(id);
     if (deleteResult > 0) {
       return true;
     } else return false;
   };
 
-  editMeeting = async (data, id) => {
+  static editMeeting = async (data, id) => {
     const [meetingTitle, date, attendees, meetingStatusId, content] = data;
     return MeetingModel.editMeeting(
       id,

@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { REFRESH_SECRET, ACCESS_SECRET } from "../config/serverConfig";
 
 class JwtService {
-  generateAccessToken = (user) => {
+  static generateAccessToken = (user) => {
     return jwt.sign(
       {
         id: user.id,
@@ -16,15 +16,15 @@ class JwtService {
     ); //change after refactoring db
   };
 
-  generateRefreshToken = (user) => {
+  static generateRefreshToken = (user) => {
     return jwt.sign({ id: user.id }, REFRESH_SECRET, { expiresIn: "30d" });
   };
 
-  verifyAccessToken = (token) => {
+  static verifyAccessToken = (token) => {
     return jwt.verify(token, ACCESS_SECRET);
   };
 
-  verifyRefreshToken = (token) => {
+  static verifyRefreshToken = (token) => {
     return jwt.verify(token, REFRESH_SECRET);
   };
 }

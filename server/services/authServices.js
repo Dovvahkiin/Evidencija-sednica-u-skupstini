@@ -2,7 +2,7 @@ import JwtService from "./jwtService";
 import UserModel from "../models/userModel";
 
 class AuthenticationService {
-  login = async (userDetails) => {
+  static login = async (userDetails) => {
     const { email, password } = userDetails;
     const user = await UserModel.userLogin(email, password);
 
