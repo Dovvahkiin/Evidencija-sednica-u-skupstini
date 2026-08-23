@@ -4,7 +4,7 @@ import UserValidations from "../validations/userValidations";
 import { setCookies, deleteCookies } from "../services/cookieServices";
 
 class AuthenticationController {
-  login = async (req, res) => {
+  static login = async (req, res) => {
     try {
       const data = req.body;
       const validationResult = await UserValidations.loginValidation(data);
@@ -22,7 +22,7 @@ class AuthenticationController {
     }
   };
 
-  logout = (req, res) => {
+  static logout = (req, res) => {
     deleteCookies();
     return res
       .status(200)

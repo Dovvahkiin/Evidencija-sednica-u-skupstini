@@ -4,7 +4,7 @@ import chalk from "chalk";
 import { genericCatchBlock } from "../utils/constants";
 
 class MeetingController {
-  async getAllMeetings(req, res) {
+  static async getAllMeetings(req, res) {
     try {
       const result = MeetingServices.getAllMeetings();
       if (result === 0)
@@ -18,7 +18,7 @@ class MeetingController {
     }
   }
 
-  async getMeetingById(req, res) {
+  static async getMeetingById(req, res) {
     try {
       const ID = parseInt(req.params.id, 10);
       const result = MeetingServices.getMeetingById(ID);
@@ -34,7 +34,7 @@ class MeetingController {
     }
   }
 
-  async createMeeting(req, res) {
+  static async createMeeting(req, res) {
     try {
       const data = req.body;
       const validationResult = await MeetingValidators.dataValidation(
@@ -63,7 +63,7 @@ class MeetingController {
     }
   }
 
-  deleteMeeting = async (req, res) => {
+  static deleteMeeting = async (req, res) => {
     try {
       const meetingID = parseInt(req.params.id, 10);
       const result = await MeetingServices.deleteMeeting(meetingID);
@@ -82,7 +82,7 @@ class MeetingController {
     }
   };
 
-  async editMeeting(req, res) {
+  static async editMeeting(req, res) {
     try {
       const data = req.body;
       const validationResult = await MeetingValidators.dataValidation(

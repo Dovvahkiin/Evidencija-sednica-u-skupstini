@@ -2,7 +2,7 @@ import UserServices from "../services/userServices";
 import { genericCatchBlock } from "../utils/constants";
 
 class UserController {
-  getProfile = async (req, res) => {
+  static getProfile = async (req, res) => {
     try {
       const id = req.user.id;
       const profile = await UserServices.getUserById(id);

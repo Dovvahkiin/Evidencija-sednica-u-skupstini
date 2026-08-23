@@ -4,7 +4,7 @@ import chalk from "chalk";
 import { genericCatchBlock } from "../utils/constants";
 
 class AgendaController {
-  createAgenda = async (req, res) => {
+  static createAgenda = async (req, res) => {
     try {
       const ID = parseInt(req.params.id, 10);
       const content = req.body;
@@ -25,7 +25,7 @@ class AgendaController {
     }
   };
 
-  updateAgenda = async (req, res) => {
+  static updateAgenda = async (req, res) => {
     try {
       const ID = parseInt(req.params.id, 10);
       const content = req.body;
@@ -46,7 +46,7 @@ class AgendaController {
     }
   };
 
-  deleteAgenda = async (req, res) => {
+  static deleteAgenda = async (req, res) => {
     try {
       const ID = parseInt(req.params.id, 10);
       const result = await AgendaServices.deleteAgenda(ID);
