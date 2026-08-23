@@ -6,13 +6,7 @@ import { serverConfig } from "./config/serverConfig.js";
 import dotenv from "dotenv";
 // import { DBTest } from "./config/dbConfig.js"; line 29
 dotenv.config();
-
-/*
-const sednicaRuter = require("./rute/sednicaRute.js");
-const dnevniRedRuter = require("./rute/dnevniRedRute.js");
-const korisnikRuter = require("./rute/korisnikRute.js");
-const autentikacijaRuter = require("./rute/autentikacioneRute.js");
-*/
+import centralizedRouter from "./routes/index.js";
 
 const app = express();
 
@@ -25,12 +19,6 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // DBTest(); - uncomment after adding database to mysql
-
-/*
-app.use("/", sednicaRuter);
-app.use("/", korisnikRuter);
-app.use("/", dnevniRedRuter);
-app.use("/", autentikacijaRuter);
-*/
+centralizedRouter(app);
 
 export default app;
