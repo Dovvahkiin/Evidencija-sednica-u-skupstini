@@ -1,4 +1,4 @@
-import DBModel from "./dbModel";
+import DBModel from "./dbModel.js";
 
 class AgendaModel extends DBModel {
   constructor() {

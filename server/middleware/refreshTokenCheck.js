@@ -1,4 +1,4 @@
-import JwtService from "../services/jwtService";
+import JwtService from "../services/jwtService.js";
 
 export const verifyRefreshToken = (req, res, next) => {
   const token = req.cookies.refreshToken;
@@ -11,12 +11,10 @@ export const verifyRefreshToken = (req, res, next) => {
     req.user = JwtService.verifyRefreshToken(token);
     next();
   } catch (error) {
-    return res
-      .status(401)
-      .json({
-        success: false,
-        message: "Invalid refresh token!",
-        error: error,
-      });
+    return res.status(401).json({
+      success: false,
+      message: "Invalid refresh token!",
+      error: error,
+    });
   }
 };

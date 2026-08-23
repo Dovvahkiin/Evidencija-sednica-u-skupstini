@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import jwt from "jsonwebtoken";
-import { REFRESH_SECRET, ACCESS_SECRET } from "../config/serverConfig";
+import { REFRESH_SECRET, ACCESS_SECRET } from "../config/serverConfig.js";
 
 class JwtService {
   static generateAccessToken = (user) => {

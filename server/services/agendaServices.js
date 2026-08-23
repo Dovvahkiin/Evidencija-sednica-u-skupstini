@@ -1,4 +1,4 @@
-import AgendaModel from "../models/agendaModel";
+import AgendaModel from "../models/agendaModel.js";
 
 class AgendaServices {
   static createAgenda = async (agendaContent, meetingID) => {

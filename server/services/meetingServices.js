@@ -1,6 +1,6 @@
-import DBModel from "../models/dbModel";
-import MeetingModel from "../models/meetingModel";
-import MembersClass from "../utils/quota";
+import DBModel from "../models/dbModel.js";
+import MeetingModel from "../models/meetingModel.js";
+import MembersClass from "../utils/quota.js";
 import chalk from "chalk";
 
 class MeetingServices {

@@ -1,5 +1,5 @@
-import JwtService from "./jwtService";
-import UserModel from "../models/userModel";
+import JwtService from "./jwtService.js";
+import UserModel from "../models/userModel.js";
 
 class AuthenticationService {
   static login = async (userDetails) => {

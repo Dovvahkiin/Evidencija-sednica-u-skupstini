@@ -1,7 +1,7 @@
-import meetingRouter from "./meetingRoutes";
-import userRouter from "./userRoutes";
-import agendaRouter from "./agendaRoutes";
-import authRouter from "./authRoutes";
+import meetingRouter from "./meetingRoutes.js";
+import userRouter from "./userRoutes.js";
+import agendaRouter from "./agendaRoutes.js";
+import authRouter from "./authRoutes.js";
 
 const centralizedRouter = (app) => {
   app.use("/", meetingRouter);

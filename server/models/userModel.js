@@ -1,4 +1,4 @@
-import DBModel from "./dbModel";
+import DBModel from "./dbModel.js";
 
 class UserModel extends DBModel {
   constructor() {

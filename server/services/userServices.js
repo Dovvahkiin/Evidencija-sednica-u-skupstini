@@ -1,5 +1,5 @@
-import DBModel from "../models/dbModel";
-import UserModel from "../models/userModel";
+import DBModel from "../models/dbModel.js";
+import UserModel from "../models/userModel.js";
 
 class UserServices extends DBModel {
   static getUserById = async (id) => {

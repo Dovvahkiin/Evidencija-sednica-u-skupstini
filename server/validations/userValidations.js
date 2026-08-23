@@ -1,4 +1,4 @@
-import { emailRegex } from "../utils/constants";
+import { emailRegex } from "../utils/constants.js";
 
 class UserValidations {
   static loginValidation = async (data = {}) => {

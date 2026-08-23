@@ -1,4 +1,4 @@
-import JwtService from "../services/jwtService";
+import JwtService from "../services/jwtService.js";
 
 class AuthMiddleware {
   static Authentication = (req, res, next) => {

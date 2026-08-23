@@ -1,4 +1,7 @@
-import { accessTokenCookie, refreshTokenCookie } from "../config/cookiesConfig";
+import {
+  accessTokenCookie,
+  refreshTokenCookie,
+} from "../config/cookiesConfig.js";
 
 export const setCookies = (res, tokens) => {
   //on login

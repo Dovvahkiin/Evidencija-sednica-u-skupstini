@@ -1,7 +1,7 @@
-import MeetingValidators from "../validations/meetingValidations";
-import AgendaServices from "../services/agendaServices";
+import MeetingValidators from "../validations/meetingValidations.js";
+import AgendaServices from "../services/agendaServices.js";
 import chalk from "chalk";
-import { genericCatchBlock } from "../utils/constants";
+import { genericCatchBlock } from "../utils/constants.js";
 
 class AgendaController {
   static createAgenda = async (req, res) => {

@@ -7,7 +7,7 @@ import {
   DB_PASSWORD,
   DB_DATABASE,
   DB_PORT,
-} from "./serverConfig";
+} from "./serverConfig.js";
 dotenv.config();
 
 const DBTest = () => {

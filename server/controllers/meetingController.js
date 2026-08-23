@@ -1,7 +1,7 @@
-import MeetingValidators from "../validations/meetingValidations";
-import MeetingServices from "../services/meetingServices";
+import MeetingValidators from "../validations/meetingValidations.js";
+import MeetingServices from "../services/meetingServices.js";
 import chalk from "chalk";
-import { genericCatchBlock } from "../utils/constants";
+import { genericCatchBlock } from "../utils/constants.js";
 
 class MeetingController {
   static async getAllMeetings(req, res) {

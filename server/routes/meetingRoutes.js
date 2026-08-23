@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
 
-import MeetingController from "../controllers/meetingController";
-import AuthMiddleware from "../middleware/auth";
+import MeetingController from "../controllers/meetingController.js";
+import AuthMiddleware from "../middleware/auth.js";
 
 router
   .route("/meetings")

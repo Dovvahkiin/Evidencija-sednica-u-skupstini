@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
 
-import AuthMiddleware from "../middleware/auth";
-import AuthenticationController from "../controllers/authController";
+import AuthMiddleware from "../middleware/auth.js";
+import AuthenticationController from "../controllers/authController.js";
 
 router.post(
   "/login",

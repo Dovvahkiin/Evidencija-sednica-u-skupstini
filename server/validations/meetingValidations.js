@@ -1,4 +1,4 @@
-import MembersClass from "../utils/quota";
+import MembersClass from "../utils/quota.js";
 const totalNumberOfMembers = await MembersClass.loadNumberOfMembers();
 
 class Validators {

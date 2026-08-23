@@ -1,5 +1,5 @@
-import UserServices from "../services/userServices";
-import { genericCatchBlock } from "../utils/constants";
+import UserServices from "../services/userServices.js";
+import { genericCatchBlock } from "../utils/constants.js";
 
 class UserController {
   static getProfile = async (req, res) => {

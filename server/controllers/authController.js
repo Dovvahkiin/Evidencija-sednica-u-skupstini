@@ -1,7 +1,7 @@
-import JwtService from "../services/jwtService";
-import { genericCatchBlock } from "../utils/constants";
-import UserValidations from "../validations/userValidations";
-import { setCookies, deleteCookies } from "../services/cookieServices";
+import JwtService from "../services/jwtService.js";
+import { genericCatchBlock } from "../utils/constants.js";
+import UserValidations from "../validations/userValidations.js";
+import { setCookies, deleteCookies } from "../services/cookieServices.js";
 
 class AuthenticationController {
   static login = async (req, res) => {
