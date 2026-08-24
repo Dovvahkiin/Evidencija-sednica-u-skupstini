@@ -2,7 +2,7 @@ import MembersClass from "../utils/quota.js";
 const totalNumberOfMembers = await MembersClass.loadNumberOfMembers();
 
 class Validators {
-  meetingInputValidation = async (data = {}) => {
+  static meetingInputValidation = async (data = {}) => {
     const { meetingTitle, date, attendees, meetingStatusId } = data;
     const errors = [];
 
@@ -35,7 +35,7 @@ class Validators {
     return errors;
   };
 
-  meetingEditingValidation = async (data = {}) => {
+  static meetingEditingValidation = async (data = {}) => {
     const { meetingTitle, date, attendees, meetingStatusId } = data;
     const errors = [];
 
