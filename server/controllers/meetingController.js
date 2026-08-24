@@ -43,7 +43,7 @@ class MeetingController {
       );
 
       if (validationResult.length > 0) {
-        return res.status(400).json({ errors: validationResult.errors });
+        return res.status(400).json({ errors: validationResult });
       }
 
       const { meetingTitle, date, attendees, meetingStatusId, content } = data;
@@ -91,7 +91,7 @@ class MeetingController {
       );
 
       if (validationResult.length > 0) {
-        return res.status(400).json({ Errors: validationResult.errors });
+        return res.status(400).json({ Errors: validationResult });
       }
 
       const { meetingTitle, date, attendees, meetingStatusId, content } = data;

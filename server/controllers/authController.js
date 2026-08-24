@@ -9,9 +9,11 @@ class AuthenticationController {
       const data = req.body;
       const validationResult = await UserValidations.loginValidation(data);
       if (validationResult.length > 0)
-        return res.status(400).json({ errors: validationResult.errors });
+        return res.status(400).json({ errors: validationResult });
+      console.log(validationResult);
 
       const tokens = await JwtService.login(data);
+
       setCookies(res, tokens);
 
       return res
@@ -23,7 +25,7 @@ class AuthenticationController {
   };
 
   static logout = (req, res) => {
-    deleteCookies();
+    deleteCookies(res);
     return res
       .status(200)
       .json({ success: true, message: "You are successfully logged out!" });

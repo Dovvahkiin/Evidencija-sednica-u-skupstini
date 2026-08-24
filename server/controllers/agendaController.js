@@ -15,7 +15,7 @@ class AgendaController {
       );
 
       if (validationResult.length > 0)
-        return res.status(400).json({ errors: validationResult.errors });
+        return res.status(400).json({ errors: validationResult });
 
       const newAgenda = await AgendaServices.createAgenda(content, ID);
       console.log(chalk.green("Successfully created agenda."));
@@ -36,7 +36,7 @@ class AgendaController {
       );
 
       if (validationResult.length > 0)
-        return res.status(400).json({ errors: validationResult.errors });
+        return res.status(400).json({ errors: validationResult });
 
       const updatedAgenda = await AgendaServices.updateAgenda(content, ID);
       console.log(chalk.green("Successfully updated agenda."));
