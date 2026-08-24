@@ -14,7 +14,7 @@ router
   .get(MeetingController.getAllMeetings);
 
 router
-  .route("/meetings/:id")
+  .route("/meeting/:id")
   .get(MeetingController.getMeetingById)
   .put(
     AuthMiddleware.Authentication,
