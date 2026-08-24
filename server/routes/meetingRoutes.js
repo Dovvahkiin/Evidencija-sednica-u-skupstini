@@ -7,7 +7,7 @@ import AuthMiddleware from "../middleware/auth.js";
 router
   .route("/meetings")
   .post(
-    AuthMiddleware.LoginCheck,
+    AuthMiddleware.Authentication,
     AuthMiddleware.Authorization("admin"),
     MeetingController.createMeeting,
   )
