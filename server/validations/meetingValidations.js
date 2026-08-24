@@ -60,10 +60,11 @@ class Validators {
     return errors;
   };
 
-  meetingAgendaValidation = async (input = {}) => {
+  static meetingAgendaValidation = async (input = {}) => {
     const errors = [];
 
-    if (input.trim() === "") errors.push("Agenda content cannot be empty\n");
+    if (!input || input.content.trim() === "")
+      errors.push("Agenda content cannot be empty\n");
     return errors;
   };
 }
