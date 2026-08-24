@@ -11,11 +11,11 @@ router
     AuthMiddleware.Authorization("admin"),
     MeetingController.createMeeting,
   )
-  .get(MeetingController.getAllMeetings);
+  .get(AuthMiddleware.Authentication, MeetingController.getAllMeetings);
 
 router
   .route("/meeting/:id")
-  .get(MeetingController.getMeetingById)
+  .get(AuthMiddleware.Authentication, MeetingController.getMeetingById)
   .put(
     AuthMiddleware.Authentication,
     AuthMiddleware.Authorization("admin"),
