@@ -7,26 +7,19 @@ class AuthenticationService {
     const user = await UserModel.userLogin(email, password);
 
     if (!user) throw new Error("Invalid Credentials");
+    if (password != user.UserPassword) throw new Error("Invalid Credentials");
 
-    if (password != user.password) throw new Error("Invalid Credentials");
+    const newAccessToken = await JwtService.generateAccessToken(user);
 
-    const newAccessToken = await JwtService.generateAccessToken({
-      id: user.id,
-      email: user.email,
-      role: user.status,
-    });
-
-    const newRefreshToken = await JwtService.generateRefreshToken({
-      id: user.id,
-    });
+    const newRefreshToken = await JwtService.generateRefreshToken(user);
 
     return {
       accessToken: newAccessToken,
       refreshToken: newRefreshToken,
       user: {
-        id: user.id,
-        email: user.emailKorisnika,
-        role: user.statusKorisnika,
+        id: user.ID,
+        email: user.Email,
+        role: user.UserRole,
       },
     };
   };

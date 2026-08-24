@@ -5,15 +5,16 @@ import { REFRESH_SECRET, ACCESS_SECRET } from "../config/serverConfig.js";
 
 class JwtService {
   static generateAccessToken = (user) => {
+    console.log(user);
     return jwt.sign(
       {
-        id: user.id,
-        email: user.emailKorisnika,
-        role: user.statusKorisnika,
+        id: user.ID,
+        email: user.userEmail,
+        role: user.UserRole,
       },
       ACCESS_SECRET,
       { expiresIn: "1h" },
-    ); //change after refactoring db
+    );
   };
 
   static generateRefreshToken = (user) => {
