@@ -14,10 +14,11 @@ class AuthenticationController {
       const tokens = await AuthenticationService.login(data);
 
       setCookies(res, tokens);
+      const output = tokens.user;
 
       return res
         .status(200)
-        .json({ success: true, message: "User is logged in!", tokens });
+        .json({ success: true, message: "User is logged in!", output });
     } catch (error) {
       return genericCatchBlock(res, error);
     }
