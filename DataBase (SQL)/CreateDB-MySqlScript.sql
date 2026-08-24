@@ -304,7 +304,7 @@ begin
 start transaction;
 
 	select COUNT(*) into doesAgendaExist from meetingRecords.agenda
-	where ID = p_meetingID;
+	where MeetingID = p_meetingID;
 	
 	select ID into meetingCheck from meetingRecords.meetings
 	where ID = p_meetingID limit 1;
@@ -432,33 +432,40 @@ end $$
 delimiter ;
 --
 
-delimiter $$
+DELIMITER $$
 
-create procedure meetingRecords.deleteMeeting (in P_meetingID int)
+CREATE PROCEDURE meetingRecords.deleteMeeting(IN p_meetingID INT)
 exit_proc:
+BEGIN
+    DECLARE meetingCheck INT DEFAULT NULL;
 
-begin
-	declare meetingCheck int;
+    START TRANSACTION;
 
-start transaction;
+    SELECT ID
+    INTO meetingCheck
+    FROM meetingRecords.meetings
+    WHERE ID = p_meetingID
+    LIMIT 1;
 
-	select ID into meetingCheck
-	from meetingrecords.meetings m
-	where m.ID = P_meetingID
-	limit 1;
-	
-	if meetingCheck is null
-	then
-	rollback;
-	select concat ('Meeting does not exist. Transaction failed.') as error;
-	leave exit_proc;
-	end if;
-	
-	delete from meetingrecords.meetings m where m.ID = P_meetingID;
-	select row_count() as deleted;
-	commit;
-	select concat('Meeting successfully deleted. Transaction successful.') as success;
-	
-end $$
-delimiter ;
---
+    IF meetingCheck IS NULL THEN
+        ROLLBACK;
+
+        SELECT
+            0 AS deleted,
+            'Meeting does not exist. Transaction failed.' AS message;
+
+        LEAVE exit_proc;
+    END IF;
+
+    DELETE FROM meetingRecords.meetings
+    WHERE ID = p_meetingID;
+
+    COMMIT;
+
+    SELECT
+        1 AS deleted,
+        'Meeting successfully deleted. Transaction successful.' AS message;
+
+END $$
+
+DELIMITER ;
