@@ -1,7 +1,4 @@
-import dotenv from "dotenv";
 import chalk from "chalk";
-dotenv.config();
-
 import { NODE_PORT } from "./config/serverConfig.js";
 import app from "./app.js";
 
