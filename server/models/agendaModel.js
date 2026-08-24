@@ -2,20 +2,20 @@ import DBModel from "./dbModel.js";
 
 class AgendaModel extends DBModel {
   constructor() {
-    super("dnevni_red");
+    super("agenda");
   }
-  static async addNewAgenda(text, IDMeeting) {
-    const query = "CALL dodajDnevniRed (?,?)";
-    return await this.doExecuteQuery(query, [text, IDMeeting]);
+  static async addNewAgenda(agendaContent, IDMeeting) {
+    const query = "CALL addAgenda (?,?)";
+    return await this.doExecuteQuery(query, [agendaContent, IDMeeting]);
   }
 
-  static async updateAgenda(text, IDMeeting) {
-    const query = "CALL azurirajDnevniRed (?,?)";
-    return await this.doExecuteQuery(query, [IDMeeting, text]);
+  static async updateAgenda(agendaContent, IDMeeting) {
+    const query = "CALL updateAgenda (?,?)";
+    return await this.doExecuteQuery(query, [agendaContent, IDMeeting]);
   }
 
   static async deleteAgenda(IDAgenda) {
-    const query = "CALL obrisiDnevniRed (?)";
+    const query = "CALL deleteAgenda (?)";
     return await this.doExecuteQuery(query, [IDAgenda]);
   }
 }

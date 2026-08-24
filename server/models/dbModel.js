@@ -6,12 +6,12 @@ class DBModel {
   }
 
   static async doQuery(query, params = []) {
-    const [result] = await dbData.query(query, params);
+    const result = await dbData.query(query, params);
     return result;
   }
 
   static async doExecuteQuery(query, params = []) {
-    const [result] = await dbData.execute(query, params);
+    const result = await dbData.execute(query, params);
     return result;
   }
 
