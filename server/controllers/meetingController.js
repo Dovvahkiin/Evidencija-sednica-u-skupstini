@@ -6,8 +6,8 @@ import { genericCatchBlock } from "../utils/constants.js";
 class MeetingController {
   static async getAllMeetings(req, res) {
     try {
-      const result = MeetingServices.getAllMeetings();
-      if (result === 0)
+      const result = await MeetingServices.getAllMeetings();
+      if (!result)
         return res
           .status(404)
           .json({ Message: "There is no recorded meetings." });
@@ -21,9 +21,9 @@ class MeetingController {
   static async getMeetingById(req, res) {
     try {
       const ID = parseInt(req.params.id, 10);
-      const result = MeetingServices.getMeetingById(ID);
+      const result = await MeetingServices.getMeetingById(ID);
 
-      if (result === 0)
+      if (!result)
         return res.status(404).json({
           Message: `Meeting with ${ID} does not exists.`,
         });
@@ -45,17 +45,8 @@ class MeetingController {
       if (validationResult.length > 0) {
         return res.status(400).json({ errors: validationResult });
       }
+      const newMeeting = await MeetingServices.createMeeting(data);
 
-      const { meetingTitle, date, attendees, meetingStatusId, content } = data;
-      let newMeetingStatusId = meetingStatusId;
-
-      const newMeeting = await MeetingServices.createMeeting(
-        meetingTitle,
-        date,
-        attendees,
-        newMeetingStatusId,
-        content,
-      );
       console.log(chalk.green("Successfully created meeting."));
       return res.status(201).json({ success: true, newMeeting });
     } catch (error) {
@@ -68,7 +59,7 @@ class MeetingController {
       const meetingID = parseInt(req.params.id, 10);
       const result = await MeetingServices.deleteMeeting(meetingID);
 
-      if (result > 0)
+      if (result)
         return res.status(200).json({
           success: true,
           message: `Meeting with an ID ${meetingID} is successfully deleted!`,
@@ -94,17 +85,8 @@ class MeetingController {
         return res.status(400).json({ Errors: validationResult });
       }
 
-      const { meetingTitle, date, attendees, meetingStatusId, content } = data;
-
       const ID = parseInt(req.params.id, 10);
-      const updateMeeting = await MeetingServices.editMeeting(
-        ID,
-        meetingTitle,
-        date,
-        attendees,
-        meetingStatusId,
-        content,
-      );
+      const updateMeeting = await MeetingServices.editMeeting(data, ID);
 
       console.log(chalk.green("Successfully updated meeting."));
       return res.status(201).json({ success: true, updateMeeting });
