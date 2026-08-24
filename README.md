@@ -10,6 +10,8 @@
 
 #
 
+_**CURRENTLY FRONTEND IS IN THE DEVELOPMENT MODE. FEEL FREE TO TEST BACKEND AND SQL DATABASE **_
+
 **A CRUD APLICATION FOR RECORDING MEETINGS IN PARLAMENT**
 
 ## FEATURES
@@ -52,7 +54,7 @@ git clone https://github.com/Dovvahkiin/Evidencija-sednica-u-skupstini.git
 2. Navigate into the client directory from root directory:
 
 ```bash
-cd klijent
+cd client
 ```
 
 3. Install dependencies from `package.json`
