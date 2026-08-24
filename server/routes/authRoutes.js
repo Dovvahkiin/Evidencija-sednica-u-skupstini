@@ -9,6 +9,6 @@ router.post(
   AuthMiddleware.LoginCheck,
   AuthenticationController.login,
 );
-router.post("logout", AuthenticationController.logout);
+router.post("/logout", AuthenticationController.logout);
 
 export default router;
