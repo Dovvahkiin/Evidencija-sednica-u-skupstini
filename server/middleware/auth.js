@@ -2,12 +2,12 @@ import JwtService from "../services/jwtService.js";
 
 class AuthMiddleware {
   static Authentication = (req, res, next) => {
-    const token = req.cookies.token;
+    const token = req.cookies.accessToken;
     if (!token)
       return res.status(401).json({ success: false, message: "Unauthorized!" });
 
     try {
-      const user = JwtService.verifyAccesToken(token);
+      const user = JwtService.verifyAccessToken(token);
       req.user = user;
       next();
     } catch (error) {
