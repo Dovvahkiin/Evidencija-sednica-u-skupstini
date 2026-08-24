@@ -15,16 +15,16 @@ class DBModel {
     return result;
   }
 
-  static async getAll() {
+  async getAll() {
     const query = `select * from ${this.tableName}`;
-    const result = await this.doQuery(query);
-    return result;
+    const result = await DBModel.doQuery(query);
+    return result[0];
   }
 
-  static async getById(id) {
+  async getById(id) {
     const query = `select * from ${this.tableName} where ID = ?`;
-    const result = await this.doExecuteQuery(query, [id]);
-    return result[0]; //returns first match
+    const result = await DBModel.doExecuteQuery(query, [id]);
+    return result[0].length > 0 ? result[0][0] : null;
   }
 }
 
