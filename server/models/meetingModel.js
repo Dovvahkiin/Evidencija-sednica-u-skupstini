@@ -14,13 +14,14 @@ class MeetingModel extends DBModel {
   ) {
     const query = "CALL createMeeting (?,?,?,?,?)";
     console.log(meetingTitle, date, attendees, meetingStatusId, content);
-    return await this.doExecuteQuery(query, [
+    const result = await this.doExecuteQuery(query, [
       meetingTitle,
       date,
       attendees,
       meetingStatusId,
       content,
     ]);
+    return result[0][0];
   }
 
   static async deleteMeeting(id) {

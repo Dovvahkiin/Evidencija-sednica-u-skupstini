@@ -6,17 +6,20 @@ class AgendaModel extends DBModel {
   }
   static async addNewAgenda(agendaContent, IDMeeting) {
     const query = "CALL addAgenda (?,?)";
-    return await this.doExecuteQuery(query, [agendaContent, IDMeeting]);
+    const result = await this.doExecuteQuery(query, [agendaContent, IDMeeting]);
+    return result[0][0];
   }
 
-  static async updateAgenda(agendaContent, IDMeeting) {
+  static async updateAgenda(IDMeeting, agendaContent) {
     const query = "CALL updateAgenda (?,?)";
-    return await this.doExecuteQuery(query, [agendaContent, IDMeeting]);
+    const result = await this.doExecuteQuery(query, [IDMeeting, agendaContent]);
+    return result[0][0];
   }
 
   static async deleteAgenda(IDAgenda) {
     const query = "CALL deleteAgenda (?)";
-    return await this.doExecuteQuery(query, [IDAgenda]);
+    const [result] = await this.doExecuteQuery(query, [IDAgenda]);
+    return result[0][0];
   }
 }
 
