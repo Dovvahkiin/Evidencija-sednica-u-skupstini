@@ -1,4 +1,4 @@
-import JwtService from "../services/jwtService.js";
+import AuthenticationService from "../services/authServices.js";
 import { genericCatchBlock } from "../utils/constants.js";
 import UserValidations from "../validations/userValidations.js";
 import { setCookies, deleteCookies } from "../services/cookieServices.js";
@@ -10,9 +10,8 @@ class AuthenticationController {
       const validationResult = await UserValidations.loginValidation(data);
       if (validationResult.length > 0)
         return res.status(400).json({ errors: validationResult });
-      console.log(validationResult);
 
-      const tokens = await JwtService.login(data);
+      const tokens = await AuthenticationService.login(data);
 
       setCookies(res, tokens);
 
