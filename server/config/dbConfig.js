@@ -10,12 +10,13 @@ import {
 } from "./serverConfig.js";
 dotenv.config();
 
-const DBTest = () => {
+const DBTest = async () => {
   try {
-    const [result] = dbData.query("SELECT 1");
-    console.log(chalk.green("MySQL connected: \n", result));
+    const [result] = await dbData.query("SELECT * from meetings");
+    console.log(chalk.green("\nMySQL connected: \n"), result);
+    console.log("\n");
   } catch (error) {
-    console.error(chalk.red("MySQL connection failed: \n"), error);
+    console.error(chalk.red("\nMySQL connection failed: \n"), error);
   }
 };
 
