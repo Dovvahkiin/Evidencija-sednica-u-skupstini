@@ -7,7 +7,7 @@ class AgendaController {
   static createAgenda = async (req, res) => {
     try {
       const ID = parseInt(req.params.id, 10);
-      const content = req.body;
+      const { content } = req.body;
 
       const validationResult = await MeetingValidators.dataValidation(
         "agenda",
@@ -28,8 +28,8 @@ class AgendaController {
   static updateAgenda = async (req, res) => {
     try {
       const ID = parseInt(req.params.id, 10);
-      const content = req.body;
-
+      const { content } = req.body;
+      console.log(content);
       const validationResult = await MeetingValidators.dataValidation(
         "agenda",
         content,
@@ -38,7 +38,7 @@ class AgendaController {
       if (validationResult.length > 0)
         return res.status(400).json({ errors: validationResult });
 
-      const updatedAgenda = await AgendaServices.updateAgenda(content, ID);
+      const updatedAgenda = await AgendaServices.updateAgenda(ID, content);
       console.log(chalk.green("Successfully updated agenda."));
       return res.status(201).json({ success: true, updatedAgenda });
     } catch (error) {
@@ -50,8 +50,9 @@ class AgendaController {
     try {
       const ID = parseInt(req.params.id, 10);
       const result = await AgendaServices.deleteAgenda(ID);
+      console.log(result);
 
-      if (result === 1) {
+      if (result.deleted === 1) {
         console.log(chalk.green("Successfully deleted agenda."));
         return res
           .status(200)
