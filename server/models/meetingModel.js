@@ -2,7 +2,7 @@ import DBModel from "./dbModel.js";
 
 class MeetingModel extends DBModel {
   constructor() {
-    super("meeting");
+    super("meetings");
   }
 
   static async addNewMeeting(
@@ -13,6 +13,7 @@ class MeetingModel extends DBModel {
     content,
   ) {
     const query = "CALL createMeeting (?,?,?,?,?)";
+    console.log(meetingTitle, date, attendees, meetingStatusId, content);
     return await this.doExecuteQuery(query, [
       meetingTitle,
       date,
@@ -24,8 +25,9 @@ class MeetingModel extends DBModel {
 
   static async deleteMeeting(id) {
     const query = "CALL deleteMeeting(?)";
-    const result = await this.doExecuteQuery(query, [id]);
-    return result[0]?.[0]?.deleted ?? 0;
+    const [result] = await this.doExecuteQuery(query, [id]);
+    console.log(result);
+    return result[0][0];
   }
 
   static async editMeeting(

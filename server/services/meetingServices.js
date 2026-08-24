@@ -5,38 +5,40 @@ import chalk from "chalk";
 
 class MeetingServices {
   static getAllMeetings = async () => {
-    const getMeetings = new DBModel("detaljanpregledsednice");
+    const getMeetings = new DBModel("allmeetings");
     const meetings = await getMeetings.getAll();
 
     if (meetings.length === 0) {
       console.log(chalk.red("There is no recored meetings."));
+      return false;
     } else {
       console.log(chalk.green("List of meetings:\n"));
-      console.log(meetings);
+      return meetings;
     }
-    return meetings;
   };
 
   static getMeetingById = async (id) => {
-    const getMeeting = new DBModel("detaljanpregledsednice");
+    const getMeeting = new DBModel("meetingdetails");
     const meeting = await getMeeting.getById(id);
 
-    if (meeting.length === 0) {
-      console.log(chalk.red("There is no recored meeting with that ID."));
-    } else {
+    if (meeting) {
       console.log(chalk.green("Selected meeting:\n"));
       console.log(meeting);
+      return meeting;
+    } else {
+      console.log(chalk.red("There is no recored meeting with that ID."));
+      return false;
     }
-    return meeting;
   };
 
   static createMeeting = async (data) => {
-    const [meetingTitle, date, attendees, meetingStatusId, content] = data;
+    const { meetingTitle, date, attendees, meetingStatusId, content } = data;
+    console.log(data);
     let newStatus = meetingStatusId;
     const currentMembersNumber = await MembersClass.membersCheck(attendees);
     if (currentMembersNumber === 0) newStatus = 3;
 
-    return MeetingModel.createMeeting(
+    return MeetingModel.addNewMeeting(
       meetingTitle,
       date,
       attendees,
@@ -47,13 +49,13 @@ class MeetingServices {
 
   static deleteMeeting = async (id) => {
     const deleteResult = await MeetingModel.deleteMeeting(id);
-    if (deleteResult > 0) {
+    if (deleteResult.deleted > 0) {
       return true;
     } else return false;
   };
 
   static editMeeting = async (data, id) => {
-    const [meetingTitle, date, attendees, meetingStatusId, content] = data;
+    const { meetingTitle, date, attendees, meetingStatusId, content } = data;
     return MeetingModel.editMeeting(
       id,
       meetingTitle,
