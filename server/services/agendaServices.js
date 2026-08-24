@@ -5,8 +5,8 @@ class AgendaServices {
     return await AgendaModel.addNewAgenda(agendaContent, meetingID);
   };
 
-  static updateAgenda = async (agendaContent, meetingID) => {
-    return await AgendaModel.updateAgenda(agendaContent, meetingID);
+  static updateAgenda = async (IDMeeting, agendaContent) => {
+    return await AgendaModel.updateAgenda(IDMeeting, agendaContent);
   };
 
   static deleteAgenda = async (agendaID) => {
