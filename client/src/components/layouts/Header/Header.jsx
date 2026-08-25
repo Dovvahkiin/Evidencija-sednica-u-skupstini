@@ -11,7 +11,9 @@ const Header = () => {
     <header>
       <div className="headingLayout">
         <div className="topHeading">
-          <h1 className="mainHeading">MEETING RECORDS APP</h1>
+          <h1 className="mainHeading">
+            <a href="">MEETING RECORDS APP</a>
+          </h1>
           <button
             className={`hamburger ${menu ? "open" : ""} `}
             onClick={clickHandler}
