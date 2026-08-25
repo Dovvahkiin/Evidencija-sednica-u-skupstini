@@ -1,0 +1,13 @@
+:root {
+  /* colors */
+
+  --lightBlue: #a8fcdc;
+  --lessLightBlue: #91d9bd;
+  --grayBlue: #76b09a;
+  --lessDarkBlue: #486d5f;
+  --darkBlue: #3f5e52;
+
+  /* fonts */
+  --mainFont: "Helvetca World", sans-serif;
+  --HeadingFont: "Open Sans", sans-serif;
+}
