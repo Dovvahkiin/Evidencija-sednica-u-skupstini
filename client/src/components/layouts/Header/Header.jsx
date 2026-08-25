@@ -1,11 +1,27 @@
-import NavBar from "./NavBar";
 import "@/styles/header/header.css";
+import NavBar from "./NavBar";
+import { useState } from "react";
 const Header = () => {
+  const [menu, setMenu] = useState(false);
+
+  const clickHandler = () => {
+    setMenu((prev) => !prev); //check state and onclick change it to opposite
+  };
   return (
     <header>
       <div className="headingLayout">
-        <div className="topHeading">test</div>
-        <NavBar />
+        <div className="topHeading">
+          <h1 className="mainHeading">MEETING RECORDS APP</h1>
+          <button
+            className={`hamburger ${menu ? "open" : ""} `}
+            onClick={clickHandler}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <NavBar isOpen={menu} />
       </div>
     </header>
   );
