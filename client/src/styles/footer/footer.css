@@ -1,0 +1,18 @@
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  background-color: var(--darkBlue);
+  margin-top: auto;
+  box-shadow: 0px -10px 5px rgba(34, 43, 38, 0.196);
+}
+
+.footerLayout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  background-color: var(--darkBlue);
+  height: 10vh;
+}
