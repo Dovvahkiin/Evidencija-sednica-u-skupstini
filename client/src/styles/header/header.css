@@ -1,0 +1,57 @@
+header {
+  display: flex;
+  justify-content: center;
+  height: 30vh;
+  background-color: var(--darkBlue);
+}
+
+.headingLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 50%;
+  background-color: var(--darkBlue);
+}
+
+.topHeading {
+  flex: 1;
+}
+
+/* navigation */
+
+nav {
+  display: flex;
+  order: 1;
+  bottom: 0;
+  height: 30%;
+  background-color: var(--darkBlue);
+  font-size: 1.2rem;
+  justify-content: space-between;
+}
+.side-nav {
+  display: flex;
+  gap: 5%;
+  align-items: center;
+  width: 40%;
+}
+.side-nav > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--lightBlue);
+  height: 100%;
+}
+
+.side-nav > a:hover {
+  background-color: var(--lessDarkBlue);
+  color: var(--lessLightBlue);
+}
+
+.side-nav.left {
+  justify-content: left;
+}
+
+.side-nav.right {
+  justify-content: right;
+}
